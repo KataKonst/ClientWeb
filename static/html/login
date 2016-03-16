@@ -1,0 +1,16 @@
+<form id='register' action='register.php' method='post'
+    accept-charset='UTF-8'>
+
+<legend>Register</legend>
+<label for='name' >Nume: </label>
+<input type='text' name='name' id='name' maxlength="50" />
+
+
+<label for='password' >Parola:</label>
+<input type='password' name='password' id='password' maxlength="50" />
+
+
+<input type='submit' name='Submit' value='login' />
+
+</fieldset>
+</form>

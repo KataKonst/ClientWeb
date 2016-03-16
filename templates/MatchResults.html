@@ -1,0 +1,25 @@
+<html>
+  <head>
+<script src="static/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+<link rel="import" href="static/bower_components/paper-audio-player/paper-audio-player.html">
+          <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+
+      <div id='cssmenu'>
+
+
+</div>
+
+  </head>
+  <body>
+    {% for track in tracks %}
+         <div>
+         <p> {{ track['nume'] }}</p>
+             <img src="http://127.0.0.1:2000/{{ track['photoLink'] }}">
+             <paper-audio-player src="http://127.0.0.1:2000/{{ track['link'] }}"  title="{{ track['link'] }}" color="#F05C38"></paper-audio-player>
+
+
+
+         </div>
+    {% endfor %}
+  </body>
+</html>

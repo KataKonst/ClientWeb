@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+<script src="static/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+<link rel="import" href="static/bower_components/eventEmitter/EventEmitter.js">
+
+<script src="http://fgnass.github.io/spin.js/spin.min.js"></script>
+<script src="static/flux/dispatcher/Dispatcher.js"></script>
+<script src="static/flux/dispatcher/AppDispatcher.js"></script>
+<script src="static/flux/Actions/Actions.js"></script>
+<script src="static/flux/Actions/ActionTypes.js"></script>
+<script src="static/flux/Actions/CommentActions.js"></script>
+<script src="static/flux/Actions/PlayListActions.js"></script>
+
+
+<script src="static/flux/Stores/TrackStore.js"></script>
+<script src="static/flux/Stores/MatchStore.js"></script>
+<script src="static/flux/Stores/CommentStore.js"></script>
+<script src="static/flux/Stores/PlayListStore.js"></script>
+
+
+<script src="http://requirejs.org/docs/release/2.1.11/minified/require.js"></script>
+
+<link rel="import" href="static/bower_components/paper-audio-player/paper-audio-player.html">
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='body/css/style.css') }}">
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='fonts/css/font-awesome.min.css') }}">
+
+<script   type="text/babel" src="/static/flux/components/TrackComponents/AudioPlayer.js"></script>
+<script   type="text/babel" src="/static/flux/components/TrackComponents/TrackList.js"></script>
+<script   type="text/babel" src="/static/flux/components/TrackComponents/MatchedTracksList.js"></script>
+<script   type="text/babel" src="/static/flux/components/CommentComponents/CommentBox.js"></script>
+<script   type="text/babel" src="/static/flux/components/CommentComponents/CommentList.js"></script>
+<script   type="text/babel" src="/static/flux/components/PlayListComponents/PlayList.js"></script>
+<script   type="text/babel" src="/static/flux/components/PlayListComponents/ListPlayList.js"></script>
+<script   type="text/babel" src="/static/flux/components/PlayListComponents/AddToPlayListButton.js"></script>
+<script   type="text/babel" src="/static/flux/components/PlayListComponents/AddToPlayLists.js"></script>
+
+<script   type="text/babel" >
+
+  $.getJSON( "/tracksJson", function( tracksList ) {
+
+
+        $.getJSON( "/getPlayLists", function( data ) {
+            ReactDOM.render(
+
+               <MatchedTrackList tracks={tracksList}  playLists={data} />,  document.getElementById('loadResults')
+        );
+
+            ReactDOM.render(
+
+               <TrackList tracks={tracksList} sectionTracks="list"  playLists={data}/>,  document.getElementById('tracks'));
+
+            ReactDOM.render(
+
+               <ListPlayList playLists={data}/>,  document.getElementById('playList'));
+
+
+        });
+
+
+
+
+  });
+
+
+
+
+
+
+
+
+
+</script>
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+      <style>
+          #loadResults{ float: right;  }
+                    .playe{ width: 500px;  }
+
+          #tracks{  float: left; }
+             .boss{
+width: 1200px;
+height: 900px;
+margin: 0 auto;
+
+
+}
+      </style>
+
+
+
+  </head>
+  <body>
+  <div class="panel boss" >
+  <div id="tracks" class="playe">
+
+  </div>
+      <div id="loadResults" class="playe">
+sdasdas
+
+
+      </div>
+
+      <div id="playList">
+sdasdas
+
+
+      </div>
+
+
+  </div>
+  </body>
+</html>
+</html>

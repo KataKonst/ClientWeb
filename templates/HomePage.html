@@ -1,0 +1,115 @@
+<html>
+  <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="static/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+
+
+
+
+
+<link rel="import" href="static/bower_components/paper-audio-player/paper-audio-player.html">
+      <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+            <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='body/css/style.css') }}">
+
+                      <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='fonts/css/font-awesome.min.css') }}">
+
+
+
+
+      <script>
+    $(document).ready(function(){
+        $(".matchButton").click(function(){
+                        alert("asda")
+
+        $("#loadResults").load("/results?nume="+encodeURIComponent(($(this).attr("boss"))),function(){
+
+            $("audio").load();
+
+        })
+        })
+
+
+        $("#searchBut").click(function () {
+            window.location.href = "/?search="+($("#search").val())
+
+
+        })
+
+        $("paper-audio-player").click(function(){
+
+            if( $(this).attr('playStatus')=='false')
+            {
+                $(this).attr('playStatus','true');
+            }
+            else
+            {
+               $(this).attr('playStatus','false');
+
+
+            }
+
+
+        })
+
+    });
+</script>
+
+      <style>
+          #loadResults{ float: right;  }
+          #tracks{  float: left; }
+             .boss{
+width: 1200px;
+height: 900px;
+margin: 0 auto;
+
+
+}
+      </style>
+
+
+      <div id='cssmenu'>
+<ul>
+   <li class='active'><a href='.'><span>Home</span></a></li>
+   <li><a href='/save'><span>Upload</span></a></li>
+   <li><a href='/login'><span>Login</span></a></li>
+    <li>
+        <div class="box">
+          <div class="container-1">
+           <input type="search" id="search" placeholder="Search..." />
+              <span class="icon"><i class="fa fa-search " id="searchBut"></i></span>
+
+          </div>
+        </div>
+
+
+    </li>
+</ul>
+</div>
+  </head>
+  <body>
+  <div class="panel boss" >
+  <div id="tracks">
+    {% for track in tracks %}
+         <div>
+         <p> {{ track['nume'] }}</p>
+
+                          <img src="http://127.0.0.1:2000/{{ track['photoLink'] }}">
+
+             <paper-audio-player  playStatus="false" id="{{ track['id'] }}" src="http://127.0.0.1:2000/{{ track['link'] }}"  title="{{ track['link'] }}" color="#F05C38"></paper-audio-player>
+
+             <input type="button"  class="matchButton btnMatch" boss="{{ track['link'] }}" value="match"  />
+
+         </div>
+    {% endfor %}
+  </div>
+      <div id="loadResults">
+sdasdas
+
+
+      </div>
+
+
+  </div>
+  </body>
+</html>

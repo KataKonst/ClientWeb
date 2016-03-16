@@ -1,0 +1,15 @@
+{
+  "name": "fbemitter",
+  "homepage": "https://github.com/facebook/emitter",
+  "version": "2.0.2",
+  "_release": "2.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.0.2",
+    "commit": "77697940f40ad2057b28b2d05d22aef330302a53"
+  },
+  "_source": "git://github.com/facebook/emitter.git",
+  "_target": "^2.0.2",
+  "_originalSource": "fbemitter",
+  "_direct": true
+}

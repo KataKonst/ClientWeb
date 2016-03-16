@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+
+<div id='cssmenu'>
+<ul>
+   <li class='active'><a href='.'><span>Home</span></a></li>
+   <li><a href='/save'><span>Upload</span></a></li>
+   <li><a href='/login'><span>Login</span></a></li>
+    <li>
+        <div class="box">
+          <div class="container-1">
+           <input type="search" id="search" placeholder="Search..." />
+              <span class="icon"><i class="fa fa-search " id="searchBut"></i></span>
+
+          </div>
+        </div>
+
+
+    </li>
+</ul>
+</div>
+
+  <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Awesome Flat Login Form" />
+  <meta name="keywords" content="Login, Flat, HTML5, CSS3" />
+  <meta name="author" content="Wahid Anggara - LunarPixel" />
+  <title>Flat Login Form</title>
+
+  <link href= "{{ url_for('static',filename='login/css/login_style.css') }}" rel="stylesheet" type="text/css">
+  <link href="{{ url_for('static',filename='login/css/font-awesome.css') }}"  rel="stylesheet" type="text/css">
+  <link href= "{{ url_for('static',filename='login/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+
+
+  <link rel="shortcut icon" href="{{ url_for('static',filename='login/img/favicon.icon') }}" />
+  <link rel="apple-touch-icon" href="{{ url_for('static',filename='img/favicon.png') }}" />
+<link rel="import" href="static/bower_components/paper-audio-player/paper-audio-player.html">
+                <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+                      <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='fonts/css/font-awesome.min.css') }}">
+
+
+
+
+
+
+
+</head>
+<body>
+  <div class="logo"></div>
+  <div class="login"> <!-- Login -->
+    <h1>Login to your account</h1>
+
+    <form class="form" method="post" action="">
+
+      <p class="field">
+        <input type="text" name="login" placeholder="Username or email" required/>
+        <i class="fa fa-user"></i>
+      </p>
+
+      <p class="field">
+        <input type="password" name="password" placeholder="Password" required/>
+        <i class="fa fa-lock"></i>
+      </p>
+
+      <p class="submit"><input type="submit" name="commit" value="Login"></p>
+
+      <p class="remember">
+        <input type="checkbox" id="remember" name="remember" />
+        <label for="remember"><span></span>Remember Me</label>
+      </p>
+
+      <p class="forgot">
+        <a href="#">Forgot Password?</a>
+      </p>
+
+    </form>
+  </div> <!--/ Login-->
+
+</body>
+</html>
