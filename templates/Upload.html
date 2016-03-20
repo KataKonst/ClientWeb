@@ -4,7 +4,69 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='body/css/style.css') }}">
+
                       <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='upload/style.css') }}">
+
+
+
+    <div id='cssmenu'>
+<ul>
+   <li class='active'><a href='.'><span>Home</span></a></li>
+   <li><a href='/save'><span>Upload</span></a></li>
+   <li><a href='/login'><span>Login</span></a></li>
+    <li>
+        <div class="box">
+          <div class="container-1">
+           <input type="search" id="search" placeholder="Search..." />
+              <span class="icon"><i class="fa fa-search " id="searchBut"></i></span>
+
+          </div>
+        </div>
+
+
+    </li>
+</ul>
+</div>
+
+
+
+
+    <style>
+  .boss{
+width: 1200px;
+height: 900px;
+margin: 0 auto;
+  }
+
+
+  .form-container {
+              position: relative;
+               left: 30%;
+              right:20%;
+              top:25%;
+              width:40%;
+              height:30%;
+       -webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+	box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+        .butonupload{
+            position: absolute;
+               left: 40%;
+              right:40%;
+              top:80%;
+
+
+
+        }
+
+
+
+</style>
+
+
 
 </head>
 <body>
@@ -12,15 +74,24 @@
 
 
 
+  <div class="panel boss" >
 
+      <div class="form-container">
 <div class="custom_file_upload">
-    <
-<form action="{{ uploadip }}:8080/save " method="post" enctype="multipart/form-data">
-                <input type="file" name="file[]" id="file" class="file">
-                    <input type="file" name="file[]" id="file" class="file">  "
+<h1>Upload File</h1>
 
-                <input type="submit" value="Upload" name="submit" id="file_upload" class="btn"></form>
+<form action="{{ uploadip }}:8080/save " method="post" enctype="multipart/form-data">
+                <p>Picture of track</p>
+                <input type="file" name="file[]" id="file" class="file">
+                 <p>Track to upload</p>
+                    <input type="file" name="file[]" id="file" class="file">
+
+                <input type="submit" value="Upload" name="submit" id="file_upload" class="btn butonupload"></form>
     </div>
+
+          </div>
+
+      </div>
 
 </body>
 </html>

@@ -1,3 +1,9 @@
+
+var React = require('react');
+var PlayListStore=require('../../stores/PlayListStore')
+var TrackList=require('../Tracks/TrackList')
+
+
  function  getComments()
  {
        return {
@@ -12,7 +18,8 @@
                   playId:this.props.playId,
                   playName:this.props.playName,
                   showTracks:false,
-                  section:this.props.section
+                  section:this.props.section,
+                  playLists:this.props.PlayLists
                 };
     },
 
@@ -36,7 +43,7 @@
                     <section id="playList">
                         <p>{this.state.playName}</p>
                         <input type="button"  className={ clss } onClick={this.showTracks} value={this.state.playName}/>
-                        { this.state.show ? <TrackList tracks={trks} sectionTracks={ sect } /> : null }
+                        { this.state.show ? <TrackList tracks={trks} sectionTracks={ sect } playLists={this.state.playLists} /> : null }
                     </section>
                 );
     },

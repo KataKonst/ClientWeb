@@ -23,4 +23,4 @@ def addVis():
     id = flask.request.args.get('id')
     parameters={'id':id}
     req= requests.get(ip+':8080/addVis',params=parameters)
-    return  req.text
+    return  '{["id":'+req.text+"]}"

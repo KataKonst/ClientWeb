@@ -5,7 +5,7 @@
  * Created by katakonst on 3/13/16.
  */
 
-
+var CommentBox = require('./CommentBox');
 function  getComments()
 {
        return {

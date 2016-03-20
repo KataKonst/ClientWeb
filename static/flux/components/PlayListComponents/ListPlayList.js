@@ -5,7 +5,9 @@
  */
 
 
-
+var React = require('react');
+var AddToPlayListButton=require('./AddToPlayListButton')
+var PlayList=require('./PlayList')
 var ListPlayList = React.createClass({
 
          propTypes: {
@@ -20,7 +22,7 @@ var ListPlayList = React.createClass({
 
               for(var i in playId)
               {
-                  playL.push(<PlayList playId={playId[i]["id"]} playName={playId[i]["nume"]} section={sect}/>)
+                  playL.push(<PlayList playId={playId[i]["id"]} playName={playId[i]["nume"]} section={sect} playLists={playId}/>)
               }
 
               return (

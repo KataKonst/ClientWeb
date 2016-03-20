@@ -1,74 +1,35 @@
-<html>
+
+<html lang="en">
   <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="static/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-
-
-
-
-
 
 <link rel="import" href="static/bower_components/paper-audio-player/paper-audio-player.html">
-      <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/style.css') }}">
-            <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='body/css/style.css') }}">
-
-                      <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='fonts/css/font-awesome.min.css') }}">
-
-
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+      <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/audioplayer.css') }}">
+            <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/hover.css') }}">
+            <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/comment.css') }}">
 
 
-      <script>
-    $(document).ready(function(){
-        $(".matchButton").click(function(){
-                        alert("asda")
 
-        $("#loadResults").load("/results?nume="+encodeURIComponent(($(this).attr("boss"))),function(){
-
-            $("audio").load();
-
-        })
-        })
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='body/css/style.css') }}">
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='fonts/css/font-awesome.min.css') }}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+<script src="static/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+      <link rel="import" href="static/bower_components/paper-audio-player/paper-audio-player.html">
 
 
-        $("#searchBut").click(function () {
-            window.location.href = "/?search="+($("#search").val())
+   <meta charset="utf-8">
+    <title>Flux • TodoMVC</title>
+    <link rel="stylesheet" href="todomvc-common/base.css">
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
 
 
-        })
-
-        $("paper-audio-player").click(function(){
-
-            if( $(this).attr('playStatus')=='false')
-            {
-                $(this).attr('playStatus','true');
-            }
-            else
-            {
-               $(this).attr('playStatus','false');
-
-
-            }
-
-
-        })
-
-    });
-</script>
-
-      <style>
-          #loadResults{ float: right;  }
-          #tracks{  float: left; }
-             .boss{
-width: 1200px;
-height: 900px;
-margin: 0 auto;
-
-
-}
-      </style>
-
-
-      <div id='cssmenu'>
+<div id='cssmenu'>
 <ul>
    <li class='active'><a href='.'><span>Home</span></a></li>
    <li><a href='/save'><span>Upload</span></a></li>
@@ -86,30 +47,79 @@ margin: 0 auto;
     </li>
 </ul>
 </div>
+
+
+
+
+</head>
+      <style>
+
+          .centered {
+              position: absolute;
+               left: 30%;
+              right:20%;
+              top:10%;
+              width:40%;
+}
+          .pacpac {
+    bottom: initial;
+    top: 0; }
+
+          #loadResults{ float: right;  }
+                    .playe{ width: 500px;  }
+
+          #tracks{  float: left; }
+          #playe{  margin: auto; }
+             .boss{
+width: 1000px;
+height: 87%;
+margin: 0 auto;
+
+
+}
+
+          .NavButton {
+    display: inline-block;
+    padding: 1em;
+    background-color: #79BD9A;
+    text-decoration: none;
+    color: white;
+}
+
+              .navButtons {
+                position: relative;
+                top:1250%;
+
+}
+
+      </style>
+
+
+
   </head>
   <body>
+  <style type="text/css">
+    .hidden { display:none; }
+</style>
   <div class="panel boss" >
-  <div id="tracks">
-    {% for track in tracks %}
-         <div>
-         <p> {{ track['nume'] }}</p>
+  <div id="tracks" class="centered">
 
-                          <img src="http://127.0.0.1:2000/{{ track['photoLink'] }}">
-
-             <paper-audio-player  playStatus="false" id="{{ track['id'] }}" src="http://127.0.0.1:2000/{{ track['link'] }}"  title="{{ track['link'] }}" color="#F05C38"></paper-audio-player>
-
-             <input type="button"  class="matchButton btnMatch" boss="{{ track['link'] }}" value="match"  />
-
-         </div>
-    {% endfor %}
   </div>
-      <div id="loadResults">
-sdasdas
+
+
+      <div id="playList">
 
 
       </div>
 
 
   </div>
+  <div id="modal">
+      </div>
+
+
+  <div id="rt">boss</div>
   </body>
-</html>
+  <script src="static/js/bundle.js"></script>
+
+</html

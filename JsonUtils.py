@@ -9,3 +9,8 @@ class JsonUtils(object):
     def getTracks(jsonString):
      parsed_json = json.loads(jsonString)
      return parsed_json
+
+    @staticmethod
+    def getid(jsonString):
+     parsed_json = json.loads(jsonString)
+     return parsed_json[0]['id']

@@ -5,7 +5,7 @@
  * Created by katakonst on 3/13/16.
  */
 
-
+var React = require('react');
 
  var AddToPlayListButton = React.createClass({
 

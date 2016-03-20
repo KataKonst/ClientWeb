@@ -16,6 +16,8 @@
 <script src="static/flux/Actions/ActionTypes.js"></script>
 <script src="static/flux/Actions/CommentActions.js"></script>
 <script src="static/flux/Actions/PlayListActions.js"></script>
+<script src="static/react/rct.js"></script>
+
 
 
 <script src="static/flux/Stores/TrackStore.js"></script>
@@ -32,6 +34,8 @@
 <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='fonts/css/font-awesome.min.css') }}">
 
 <script   type="text/babel" src="/static/flux/components/TrackComponents/AudioPlayer.js"></script>
+<script   type="text/babel" src="/static/flux/components/Mod.js"></script>
+
 <script   type="text/babel" src="/static/flux/components/TrackComponents/TrackList.js"></script>
 <script   type="text/babel" src="/static/flux/components/TrackComponents/MatchedTracksList.js"></script>
 <script   type="text/babel" src="/static/flux/components/CommentComponents/CommentBox.js"></script>
@@ -63,10 +67,29 @@
 
         });
 
+      ReactDOM.render(<App/>, document.body);
+
+
 
 
 
   });
+
+
+
+
+
+/*
+By default the modal is anchored to document.body. All of the following overrides are available.
+
+* element
+Modal.setAppElement(appElement);
+
+* query selector - uses the first element found if you pass in a class.
+Modal.setAppElement('#your-app-element');
+
+*/
+
 
 
 

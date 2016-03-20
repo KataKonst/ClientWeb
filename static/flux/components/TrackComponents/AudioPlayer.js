@@ -1,6 +1,13 @@
 /**
  * Created by katakonst on 3/13/16.
  */
+var React = require('react');
+var AddToPlayListButton=require('../PlayListComponents/AddToPlayListButton')
+var PlayList=require('../PlayListComponents/PlayList')
+var CommentStore=require('../../stores/CommentStore')
+var PLayListStore=require('../../stores/PLayListStore')
+var CommentList=require('../CommentComponents')
+var TrackStore=require('../../stores/TrackStore')
 var AudioPlayer = React.createClass({
 
   propTypes: {
