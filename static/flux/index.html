@@ -1,0 +1,168 @@
+<head><style>body {transition: opacity ease-in 0.2s; }
+body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; }
+</style><style scope="paper-progress"> </style><style scope="iron-icon"> </style><style scope="paper-ripple">paper-ripple {
+  display: block;
+        position: absolute;
+        border-radius: inherit;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+
+        pointer-events: none;
+}
+
+paper-ripple[animating] {
+  -webkit-transform: translate(0, 0);
+        transform: translate3d(0, 0, 0);
+}
+
+#background.paper-ripple, #waves.paper-ripple, .wave-container.paper-ripple, .wave.paper-ripple {
+  pointer-events: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+}
+
+#background.paper-ripple, .wave.paper-ripple {
+  opacity: 0;
+}
+
+#waves.paper-ripple, .wave.paper-ripple {
+  overflow: hidden;
+}
+
+.wave-container.paper-ripple, .wave.paper-ripple {
+  border-radius: 50%;
+}
+
+paper-ripple.circle #background.paper-ripple, paper-ripple.circle #waves.paper-ripple {
+  border-radius: 50%;
+}
+
+paper-ripple.circle .wave-container.paper-ripple {
+  overflow: hidden;
+}</style><style scope="paper-icon-button"> </style>
+
+<link rel="import" href="static/bower_components/paper-audio-player/paper-audio-player.html">
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+      <link rel="stylesheet" type="text/css" href="/static/css/audioplayer.css">
+            <link rel="stylesheet" type="text/css" href="/static/css/hover.css">
+
+
+<link rel="stylesheet" type="text/css" href="/static/body/css/style.css">
+<link rel="stylesheet" type="text/css" href="/static/fonts/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script><style type="text/css"></style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+<script src="static/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+      <link rel="import" href="static/bower_components/paper-audio-player/paper-audio-player.html">
+
+
+    <meta charset="utf-8">
+    <title>Flux • TodoMVC</title>
+    <link rel="stylesheet" href="todomvc-common/base.css">
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>html lang="en"&gt;
+
+      <meta charset="UTF-8">
+      <title>Title</title>
+
+
+  <div id="cssmenu">
+  <ul>
+     <li class="active"><a href="."><span>Home</span></a></li>
+     <li><a href="/save"><span>Upload</span></a></li>
+     <li><a href="/login"><span>Login</span></a></li>
+      <li>
+          <div class="box">
+            <div class="container-1">
+             <input type="search" id="search" placeholder="Search...">
+                <span class="icon"><i class="fa fa-search " id="searchBut"></i></span>
+
+            </div>
+          </div>
+
+
+      </li>
+  </ul>
+  </div>
+
+
+
+
+
+        <style>
+
+            .centered {
+                position: absolute;
+                 left: 30%;
+                right:20%;
+                top:10%;
+                width:40%;
+                height:100%
+  }
+
+            #loadResults{ float: right;  }
+                      .playe{ width: 500px;  }
+
+            #tracks{  float: left; }
+            #playe{  margin: auto; }
+               .boss{
+  width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+
+
+  }
+
+            .NavButton {
+      display: inline-block;
+      padding: 1em;
+      background-color: #79BD9A;
+      text-decoration: none;
+      color: white;
+  }
+
+                .navButtons {
+                  position: absolute;
+                  right:0%;
+                  left:20%
+                  top:10%;
+
+  }
+
+        </style>
+
+
+
+
+
+    <style type="text/css">
+      .hidden { display:none; }
+  </style>
+    <div class="panel boss">
+    <div id="tracks" class="centered"><div data-reactid=".1"><div class="navButtons" data-reactid=".1.0"><div data-reactid=".1.0.0"><input type="button" class="NavButton hvr-float" value="Show Comment" data-reactid=".1.0.0.0"><input type="button" class="NavButton hvr-float" value="Show Likes" data-reactid=".1.0.0.1"><input type="button" class="NavButton hvr-float" value="Show Recomended" data-reactid=".1.0.0.2"></div></div></div></div>
+
+
+        <div id="playList">
+
+
+        </div>
+
+
+    </div>
+    <div id="modal">
+        </div>
+
+
+    <div id="rt"><section id="match" data-reactid=".0"><div id="audio_player" class="audio_player" data-reactid=".0.0" title="sadasdd"><div class="audio_controls" data-reactid=".0.0.0"><div id="skip_button" class="skip_button back audio_button hidden" data-reactid=".0.0.0.0"><div class="skip_button_inner" data-reactid=".0.0.0.0.0"><div class="right_facing_triangle" data-reactid=".0.0.0.0.0.0"></div><div class="right_facing_triangle" data-reactid=".0.0.0.0.0.1"></div></div></div><div id="play_pause_button" class="play_pause_button audio_button paused" data-reactid=".0.0.0.1"><div class="play_pause_inner" data-reactid=".0.0.0.1.0"><div class="left" data-reactid=".0.0.0.1.0.0"></div><div class="right" data-reactid=".0.0.0.1.0.1"></div><div class="triangle_1" data-reactid=".0.0.0.1.0.2"></div><div class="triangle_2" data-reactid=".0.0.0.1.0.3"></div></div></div><div id="skip_button" class="skip_button audio_button" data-reactid=".0.0.0.2"><div class="skip_button_inner" data-reactid=".0.0.0.2.0"><div class="right_facing_triangle" data-reactid=".0.0.0.2.0.0"></div><div class="right_facing_triangle" data-reactid=".0.0.0.2.0.1"></div></div></div></div><div id="audio_progress_container" class="audio_progress_container" data-reactid=".0.0.1"><div id="audio_progress" class="audio_progress" style="width: 0%;" data-reactid=".0.0.1.0"></div><div id="audio_progress_overlay" class="audio_progress_overlay" data-reactid=".0.0.1.1"><div class="audio_info_marquee" data-reactid=".0.0.1.1.0"><div id="audio_info" class="audio_info noselect" draggable="false" data-reactid=".0.0.1.1.0.0">sadasdd</div></div><div id="audio_time_progress" class="audio_time_progress noselect" draggable="false" data-reactid=".0.0.1.1.1">00:00 / 03:01</div></div></div></div></section></div>
+
+    <script src="static/js/bundle.js"></script>
+
+  </body>
+  </html>
