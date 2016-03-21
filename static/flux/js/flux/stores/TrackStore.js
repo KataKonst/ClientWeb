@@ -53,16 +53,6 @@ function getVis(id)
 
 var TrackStore = Object.assign({}, EventEmitter.prototype, {
 
-
-  areAllComplete: function() {
-    for (var id in _todos) {
-      if (!_todos[id].complete) {
-        return false;
-      }
-    }
-    return true;
-  },
-
   emitGetVisEvent: function() {
     this.emit(GET_VIZ_EVENT)
   },

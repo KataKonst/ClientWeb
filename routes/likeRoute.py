@@ -25,7 +25,7 @@ def likeTrack():
      userId = flask.request.args.get('userId')
      parameters={'trackId':trackId,'userId':userId}
      req = requests.get(ip+":8080/likeTrack",params=parameters)
-     return  req.text
+     return  '{["id":'+req.text+"]}"
 
 
 
@@ -43,4 +43,11 @@ def getPlayLists():
     trackId = flask.request.args.get('trackId')
     parameters={'trackId':trackId}
     req = requests.get(ip+":8080/getUserTrackLiked",params=parameters)
+    return  req.text
+
+@likeRoutes.route('/getTrackNrLikes')
+def getTrackNrLikes():
+    trackId = flask.request.args.get('trackId')
+    parameters={'trackId':trackId}
+    req = requests.get(ip+":8080/getTrackNrLikes?",params=parameters)
     return  req.text

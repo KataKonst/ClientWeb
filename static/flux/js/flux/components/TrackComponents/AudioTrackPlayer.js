@@ -19,6 +19,7 @@ var Locations = Router.Locations
 var Location = Router.Location
 var Link = Router.Link
 var Track =require("./Track")
+var LikeTrackButton= require("./LikeTrackButton")
 
 
 
@@ -154,6 +155,7 @@ var lnk="/track/ss?id="+this.state.id+"&photoLink="+this.state.photoLink+"&track
             <div onClick={this.playClick}>  <AudioPlayer playlist={ playlit } hideBackSkip={ true }  /> </div>
                   <input type="button"  className={ clss } onClick={this.showComment} value="ShowComment"  />
                   <input type="button"  className={ clss } onClick={this.showLists} value="addToLists"  />
+                  <LikeTrackButton userId={this.state.userId} trackId={this.state.id} />
                   { this.state.show ? <CommentList comments={this.state.comments} trackId={this.state.id} userId={this.state.userId} /> : null }
                   { this.state.showPlayList ? < PlayListModal playLists={this.state.playLists} trackId={this.state.id} sectionTracks={this.state.sectionTracks} /> : null }
               </section>

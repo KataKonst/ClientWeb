@@ -19,6 +19,12 @@ ActionTypes.hidePlayList="hidePlayLists"
 ActionTypes.PlaySong="PlaySong"
 ActionTypes.AddVis="AddVis"
 ActionTypes.GetVis="GetVis"
+ActionTypes.LikeTrack="LikeTrack"
+ActionTypes.GetTrackLikes="GetTrackLikes"
+ActionTypes.GetTrackLikesNr="GetTrackLikesNr"
+ActionTypes.GetUsersWhoLikedTrack="GetUsersWhoLikedTrack"
+
+
 
 
 
