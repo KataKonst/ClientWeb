@@ -41,7 +41,7 @@ function  getComments()
         var coms=this.state.comments;
 
          for(var i in coms){
-          coments.push(<Comment userName={coms[i]["authorName"]} commentText={coms[i]["Text"]}/>)
+          coments.push(<Comment userName={coms[i]["authorName"]} commentText={coms[i]["Text"]} photoLink={coms[i]["photoLink"]}/>)
 
 
 

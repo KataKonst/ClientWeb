@@ -21,7 +21,6 @@ var ReactDOM=require('react-dom')
 
              $.getJSON("/getUserId",function(id){
 
-               ReactDOM.render(<FixedPlayer/>,  document.getElementById('rt'));
 
                ReactDOM.render(<AppRoute/>,  document.getElementById('tracks'));
                       });
