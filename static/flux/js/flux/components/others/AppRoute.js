@@ -6,6 +6,8 @@ var Location = Router.Location
 var Link = Router.Link
 var Track =require("../TrackComponents/Track")
 var HomePage =require("./HomePage")
+var Profile =require("../UserComponents/Profile")
+
 
 
 var AppRoute = React.createClass({
@@ -15,6 +17,8 @@ var AppRoute = React.createClass({
       <Locations>
       <Location path="/track/:trackId" handler={Track} />
       <Location path="/" handler={HomePage} />
+      <Location path="/profile/:userId" handler={Profile} />
+
       </Locations>
     )
   }

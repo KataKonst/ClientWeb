@@ -4,7 +4,11 @@
 
 <link rel="import" href="static/bower_components/paper-audio-player/paper-audio-player.html">
 <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+      <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/LikeHeart.css') }}">
+
       <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/audioplayer.css') }}">
+            <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/buttons.css') }}">
+
             <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/hover.css') }}">
             <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/comment.css') }}">
 
@@ -12,6 +16,8 @@
 
 <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='body/css/style.css') }}">
 <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='fonts/css/font-awesome.min.css') }}">
+      <link rel="stylesheet" href= "{{ url_for('static',filename="css/bbplayer.css") }}">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
 <script src="static/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
@@ -20,8 +26,9 @@
 
    <meta charset="utf-8">
     <title>Flux • TodoMVC</title>
-    <link rel="stylesheet" href="todomvc-common/base.css">
-    <link rel="stylesheet" href="css/app.css">
+
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+
   </head>
   html lang="en">
 <head>
@@ -29,30 +36,19 @@
     <title>Title</title>
 
 
-<div id='cssmenu'>
-<ul>
-   <li class='active'><a href='.'><span>Home</span></a></li>
-   <li><a href='/save'><span>Upload</span></a></li>
-   <li><a href='/login'><span>Login</span></a></li>
-    <li>
-        <div class="box">
-          <div class="container-1">
-           <input type="search" id="search" placeholder="Search..." />
-              <span class="icon"><i class="fa fa-search " id="searchBut"></i></span>
-
-          </div>
-        </div>
-
-
-    </li>
-</ul>
-</div>
-
 
 
 
 </head>
+
+
+
       <style>
+
+            ul#horizontal li {
+    display:inline;
+}
+
 
           .centered {
               position: absolute;
@@ -98,6 +94,22 @@ margin: 0 auto;
 
   </head>
   <body>
+
+
+
+
+<span class="likebtn-wrapper" data-theme="disk" data-white_label="true" data-identifier="like" data-dislike_enabled="false" data-icon_dislike_show="false">4</span>
+<script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+
+
+
+
+
+
+
+
+  <div id="navbar"></div>
+
   <style type="text/css">
     .hidden { display:none; }
 </style>
@@ -116,10 +128,62 @@ margin: 0 auto;
   </div>
   <div id="modal">
       </div>
+<Style>
+  .clickable {
+    border: 1px solid #333;
+    background: #eee;
+    height: 40px;
+    width: 200px;
+    margin: 15px;
+    position: relative;
+}
+.display {
+    height: 16px;
+    position: absolute;
+    width: 100%;
+}
+.progress {
+    position:absolute;
+    left:0;
+    top:0;
+    background:green;
+    height:40px;
+    width:10px;
+}
+  </Style>
+
+
+
 
 
   <div id="rt">boss</div>
   </body>
   <script src="static/js/bundle.js"></script>
+
+
+
+<script>
+var vid = document.getElementById("player");
+function setCurTime(x) {
+    vid.currentTime=x;
+}
+
+
+    $('#player').on('timeupdate', function() {
+    $('#seekbar').attr("value", this.currentTime / this.duration);
+
+});
+
+
+
+    $('#seekbar').bind('click', function (e) {
+            var value_clicked = e.offsetX * this.max / this.offsetWidth;
+
+       setCurTime(value_clicked*vid.duration)
+
+});
+
+</script>
+
 
 </html

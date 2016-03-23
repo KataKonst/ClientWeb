@@ -19,13 +19,14 @@ var SoundActions = {
             text: text
         });
     },
-    PlaySong:function(trackLink,trackName)
+    PlaySong:function(trackLink,trackName,id)
   {
 
             AppDispatcher.dispatch({
                 actionType: ActionTypes.PlaySong,
                 trackLink: trackLink,
-                trackName: trackName
+                trackName: trackName,
+                id:id
 
             });
   },
@@ -48,6 +49,16 @@ getVis:function(trackId)
             trackId: trackId
 
         });
+},
+searchTracks:function(searchText)
+{
+  alert("Action")
+  AppDispatcher.dispatch({
+      actionType: ActionTypes.searchTracks,
+      searchText: searchText
+
+  });
+
 }
 
 

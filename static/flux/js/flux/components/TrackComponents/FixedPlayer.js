@@ -21,8 +21,8 @@ var TrackStore=require('../../stores/TrackStore')
 
         return {
 
-            trackName:this.props.trackName,
-            trackLink:this.props.trackLink
+            trackName:"s",
+            trackLink:"s"
 
         }
       },
@@ -38,19 +38,31 @@ var TrackStore=require('../../stores/TrackStore')
           },
           playListener:function()
           {
+            alert("ss")
+
+
 this.setState({trackName:TrackStore.getTrackName(),trackLink:TrackStore.getTrackLink()})
+var audo = document.getElementById('FixedPlayer');
+audo.src='http://127.0.0.1:2000/'+this.state.trackLink
+audo.load()
 
           },
 
           render: function() {
+
+
             var playlit =
               [{ url: 'http://127.0.0.1:2000/'+this.state.trackLink,
                  displayText:this.state.trackName }]
+                 url='http://127.0.0.1:2000/'+this.state.trackLink;
 
               return (
                        <section id="match">
-                       <AudioPlayer playlist={ playlit } className={"pacpac"} hideBackSkip={ true } />
-                       </section>
+                       <audio controls className={"pacpac"} id="FixedPlayer">
+
+                            <source src={url}/>
+
+                          </audio>                       </section>
                );
           },
 

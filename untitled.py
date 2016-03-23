@@ -62,17 +62,16 @@ def test():
 def save():
     return  render_template("Upload.html",uploadip=ip)
 
-@app.route('/react', methods=['GET', 'POST'])
+@app.route('/search', methods=['GET', 'POST'])
 def react():
-     name = flask.request.args.get('search')
+     name = flask.request.args.get('searchText')
      if(name==None):
       r = requests.get(ip+':8080/tracks')
      else:
       r= requests.get(ip+':8080/search?nume='+name)
       print(r.text)
 
-     posts=JsonUtils.getTracks(r.text);
-     return  render_template("React.html", tracks=r.text)
+     return  r.text
 
 
 @app.route('/tracksJson', methods=['GET', 'POST'])

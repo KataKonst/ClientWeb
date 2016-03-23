@@ -39,4 +39,3 @@ var ListPlayList = React.createClass({
           },
      });
 module.exports=ListPlayList
-window.ListPlayList = ListPlayList;

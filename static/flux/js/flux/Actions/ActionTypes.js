@@ -23,9 +23,9 @@ ActionTypes.LikeTrack="LikeTrack"
 ActionTypes.GetTrackLikes="GetTrackLikes"
 ActionTypes.GetTrackLikesNr="GetTrackLikesNr"
 ActionTypes.GetUsersWhoLikedTrack="GetUsersWhoLikedTrack"
-
-
-
+ActionTypes.GetUserDetailsEvent="GET_USER_DETAILS_EVENT"
+ActionTypes.ShowUserProfile="ShowUserProfile"
+ActionTypes.searchTracks="searchTracks"
 
 
 

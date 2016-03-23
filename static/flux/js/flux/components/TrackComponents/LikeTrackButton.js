@@ -26,9 +26,11 @@ var LikeTrackButton = React.createClass({
   },
   likeTrack:function()
   {
+
   },
   likeTrackClick:function()
   {
+    alert(1)
     LikesActions.likeTrack(this.props.userId,this.props.trackId);
   },
   showLikesNr:function(){
@@ -40,9 +42,11 @@ var LikeTrackButton = React.createClass({
   render:function()
   {
      return(
+
            <div>
-             <input type="button"  className={ "matchButton btnMatch" } onClick={this.likeTrackClick} value="Like"  />
-             <p>{this.state.likesNr}</p>
+
+           <button className={"button button-glow button-circle button-action button-jumbo"}><i className={"fa fa-thumbs-up"}></i></button>
+
            </div>
 
      )

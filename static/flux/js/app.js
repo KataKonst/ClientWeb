@@ -8,6 +8,8 @@ var FixedPlayer = require('./flux/components/TrackComponents/FixedPlayer')
 
 var ListPlayList = require('./flux/components/PlayListComponents/ListPlayList')
 var Profile = require('./flux/components/UserComponents/Profile')
+var TopBar = require('./flux/components/others/TopBar');
+
 var AppRoute = require('./flux/components/others/AppRoute')
 var ReactDOM=require('react-dom')
 
@@ -23,7 +25,16 @@ var ReactDOM=require('react-dom')
 
 
                ReactDOM.render(<AppRoute/>,  document.getElementById('tracks'));
+                  ReactDOM.render(<FixedPlayer/>,  document.getElementById('rt'));
+                  ReactDOM.render(<TopBar userId={id}/>,  document.getElementById('navbar'));
+
+
+
                       });
+
+
+
+
 
 
 

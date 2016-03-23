@@ -5,6 +5,7 @@ var trackLink
 var trackName
 var viz;
 var trackId
+var searchText
 
 
 
@@ -18,14 +19,17 @@ var CHANGE_EVENT = 'change';
 var PLAY_EVENT = 'PLAY_EVENT';
 var GET_VIZ_EVENT = 'GET_VIZ_EVENT';
 var ADD_VIZ_EVENT = 'ADD_VIZ_EVENT';
+var SEARCH_TRACKS_EVENT = 'SEARCH_TRACKS_EVENT';
 
+var divid
 
 var $=require('jquery')
 
-function setPlaySong(strackName,strackId)
+function setPlaySong(strackName,strackId,_div)
 {
   trackLink=strackId;
   trackName=strackName;
+  divid=_div;
   TrackStore.emitPlayEvent();
 }
 
@@ -49,12 +53,29 @@ function getVis(id)
     });
 
 }
+var trackSearchResults;
+
+function searchTracks(pSearchText)
+{
+  console.log("searchTracks")
+
+     $.getJSON("/search?searchText="+encodeURIComponent(searchText),function(data){
+          trackSearchResults=data
+          searchText=pSearchText
+          TrackStore.emitSearchTextEvent()
+
+     })
+
+}
 
 
 var TrackStore = Object.assign({}, EventEmitter.prototype, {
 
   emitGetVisEvent: function() {
     this.emit(GET_VIZ_EVENT)
+  },
+  emitSearchTextEvent: function() {
+    this.emit(SEARCH_TRACKS_EVENT)
   },
   emitAddVisEvent: function() {
     this.emit(ADD_VIZ_EVENT)
@@ -67,7 +88,13 @@ var TrackStore = Object.assign({}, EventEmitter.prototype, {
   },
   addChangeListener: function(callback) {
   },
-
+ addSearchTracksEvent :function(callback)
+ {
+  this.addListener(SEARCH_TRACKS_EVENT,callback)
+ },
+removeSearchTracksEvent:function(callback){
+  this.removeListener(SEARCH_TRACKS_EVENT,callback)
+},
 addGetVisListener:function(callback)
 {
   this.addListener(GET_VIZ_EVENT,callback)
@@ -110,6 +137,18 @@ removGetVisListener:function(callback)
   getViews:function()
   {
     return viz
+  },
+  getDiv:function()
+  {
+    return divid;
+  },
+  getSearchResults:function()
+  {
+    return trackSearchResults
+  },
+  getSearchText:function()
+  {
+    return searchText
   }
 });
 
@@ -123,19 +162,29 @@ removGetVisListener:function(callback)
              TrackStore.emitChange();
           }
           break;
-       case ActionTypes.PlaySong:
-        trackNme=action.trackName
-        trackd=action.trackLink
-        setPlaySong(trackNme,trackd)
+      case ActionTypes.PlaySong:
+            trackNme=action.trackName
+            trackd=action.trackLink
+            divid=action.id
+            setPlaySong(trackNme,trackd)
         break;
-        case ActionTypes.AddVis:
-         trackd=action.trackId
-         addVis(trackd)
-         case ActionTypes.GetVis:
-          trackd=action.trackId
-          getVis(trackd)
 
-        default:
+    case ActionTypes.AddVis:
+           trackd=action.trackId
+          addVis(trackd)
+          break
+
+    case ActionTypes.GetVis:
+           trackd=action.trackId
+           getVis(trackd)
+          break
+
+    case ActionTypes.searchTracks:
+
+         text=action.searchText
+         searchTracks(text);
+         break
+    default:
   }
 });
 

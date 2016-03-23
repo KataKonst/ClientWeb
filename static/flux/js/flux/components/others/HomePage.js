@@ -2,16 +2,16 @@
  * Created by katakonst on 3/13/16.
  */
 
-
-/**
- * Created by katakonst on 3/13/16.
- */
 var React = require('react');
 var TrackList = require('../TrackComponents/TrackList');
+
 var MatchStore = require('../../stores/MatchStore');
+var TrackStore = require('../../stores/TrackStore');
+
 var tracks;
 var sectionTracks;
 var userId;
+var srchText;
 
 function  getTrackState(fnc){
 
@@ -28,47 +28,38 @@ function  getTrackState(fnc){
                               userId=id
                               fnc(tracks,sectionTracks,playLists,userId);
 
-
-
-
-
-
-
-
-                });
-  });
-});
-}
+                         });
+                   });
+             });
+        }
 
       var HomePage = React.createClass({
+              getInitialState: function() {
+                         return ({
+                                   show:false,
+                                    searchText:"s"
+                              })
+              },
+            componentDidMount: function() {
+              getTrackState(this.ch)
+            TrackStore.addSearchTracksEvent(this.searchTracks)
+            },
+            componentWillUnmount: function() {
+            },
+            searchTracks:function(){
 
+              alert(TrackStore.getSearchResults()[0]["link"])
+                    this.setState({tracks:TrackStore.getSearchResults(),searchText:TrackStore.getSearchText()})
 
-        getInitialState: function() {
+            },
+          ch :function(trcks,sectionTrcks,playLsts,useId){
 
-        return ({
-            show:false
-
-        })
-        },
-
-
-          componentDidMount: function() {
-            getTrackState(this.ch)
-
-          },
-
-          componentWillUnmount: function() {
-          },
-
-
-
-  ch :function(trcks,sectionTrcks,playLsts,useId){
-
-this.setState({tracks:trcks,
+          this.setState({tracks:trcks,
                sectionTracks:sectionTrcks,
                playLists:playLsts,
                userId:useId,
-               show:true})
+               show:true,
+               searchText:"s"})
 
           },
 
@@ -77,8 +68,9 @@ this.setState({tracks:trcks,
 
               return (
                        <section id="match">
-                        { this.state.show ? <TrackList tracks={this.state.tracks} sectionTracks={ "list" } playLists={this.state.playLists} userId={this.state.userId}/>:null}
-                       </section>
+                        { this.state.show ? <TrackList key={this.state.searchText} tracks={this.state.tracks} sectionTracks={ "list" } playLists={this.state.playLists} userId={this.state.userId} searchText={this.state.searchText}/> :null}
+                      </section>
+
                );
           },
 

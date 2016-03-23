@@ -16,8 +16,8 @@ var nrLikes;
 var $=require('jquery')
 var ActionTypes=require('../Actions/ActionTypes')
 var AppDispatcher = require('../dispatcher/AppDispatcher');
-function likeTrack(trackId,userId) {
 
+function likeTrack(trackId,userId) {
     $.get( "/likeTrack?userId="+encodeURIComponent(userId)+"&trackId="+encodeURIComponent(trackId), function( data ) {
         gTrackId=trackId;
         LikeStore.emitLike();
