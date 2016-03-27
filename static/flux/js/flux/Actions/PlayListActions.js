@@ -20,7 +20,6 @@ var PlayListActions = {
 
     CreatePlayList: function(trackId,section,playlistNume,userId)
     {
-
          AppDispatcher.dispatch({
             actionType: ActionTypes.CreatePlayList,
             trackId: trackId,
@@ -71,6 +70,16 @@ var PlayListActions = {
              trackId: trackId,
              section: sectionTracks,
         });
+    },
+
+
+    getPlayListsUsers:function(userId)
+    {
+      AppDispatcher.dispatch({
+           actionType: ActionTypes.playListsOfUser,
+           trackId: userId,
+      });
+
     }
 
 

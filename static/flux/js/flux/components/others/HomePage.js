@@ -7,6 +7,13 @@ var TrackList = require('../TrackComponents/TrackList');
 
 var MatchStore = require('../../stores/MatchStore');
 var TrackStore = require('../../stores/TrackStore');
+var SearchStore = require('../../stores/SearchStore');
+var UserStore = require('../../stores/UserStore');
+var UserList = require('../UserComponents/UserList');
+
+
+
+var RightMenu=require('./RightMenu')
 
 var tracks;
 var sectionTracks;
@@ -37,19 +44,22 @@ function  getTrackState(fnc){
               getInitialState: function() {
                          return ({
                                    show:false,
-                                    searchText:"s"
+                                   showUsersResults:false
                               })
               },
             componentDidMount: function() {
               getTrackState(this.ch)
             TrackStore.addSearchTracksEvent(this.searchTracks)
+            UserStore.addSearchUserListener(this.searchUser)
             },
             componentWillUnmount: function() {
             },
+           searchUser:function()
+           {
+                 this.setState({users:UserStore.getUserSearchResults(),searchText:UserStore.getSearchText(),showUsersResults:true,show:false})
+           },
             searchTracks:function(){
-
-              alert(TrackStore.getSearchResults()[0]["link"])
-                    this.setState({tracks:TrackStore.getSearchResults(),searchText:TrackStore.getSearchText()})
+                  this.setState({tracks:TrackStore.getSearchResults(),searchText:TrackStore.getSearchText(),showUsersResults:false,show:true})
 
             },
           ch :function(trcks,sectionTrcks,playLsts,useId){
@@ -58,8 +68,7 @@ function  getTrackState(fnc){
                sectionTracks:sectionTrcks,
                playLists:playLsts,
                userId:useId,
-               show:true,
-               searchText:"s"})
+               show:true})
 
           },
 
@@ -67,8 +76,10 @@ function  getTrackState(fnc){
               var sect="match"
 
               return (
-                       <section id="match">
-                        { this.state.show ? <TrackList key={this.state.searchText} tracks={this.state.tracks} sectionTracks={ "list" } playLists={this.state.playLists} userId={this.state.userId} searchText={this.state.searchText}/> :null}
+                       <section id="match" className={"centered"}>
+                        <RightMenu/>
+                        { this.state.show ? <TrackList  key={this.state.searchText} tracks={this.state.tracks} sectionTracks={ "list" } playLists={this.state.playLists} userId={this.state.userId}/> :null}
+                        { this.state.showUsersResults ? <UserList key={this.state.searchText} users={this.state.users}  userId={this.state.userId}/> :null}
                       </section>
 
                );

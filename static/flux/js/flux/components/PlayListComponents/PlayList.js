@@ -7,12 +7,6 @@ var TrackList=require('../TrackComponents/TrackList')
 
 
 
- function  getComments()
- {
-       return {
-                 tracks: PlayListStore.getTracks()
-              };
-  }
   var PlayList = React.createClass({
     getInitialState: function() {
 
@@ -45,13 +39,13 @@ var TrackList=require('../TrackComponents/TrackList')
                     <section id="playList">
                         <p>{this.state.playName}</p>
                         <input type="button"  className={ clss } onClick={this.showTracks} value={this.state.playName}/>
-                        { this.state.show ? <TrackList tracks={trks} sectionTracks={ sect } playLists={this.state.playLists} /> : null }
+                        { this.state.showTracks ? <TrackList tracks={trks} sectionTracks={ sect } playLists={this.state.playLists} /> : null }
                     </section>
                 );
     },
       listTracks: function() {
 
-          this.setState({show:true,tracks:PlayListStore.getTracks()});
+          this.setState({showTracks:true,tracks:PlayListStore.getTracks()});
 
       },
 });

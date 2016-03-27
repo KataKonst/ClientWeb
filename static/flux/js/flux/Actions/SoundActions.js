@@ -7,9 +7,7 @@ var ActionTypes = require('./ActionTypes');
 
 var SoundActions = {
 
-    /**
-     * @param  {string} text
-     */
+
 
 
     match: function (text) {
@@ -19,14 +17,15 @@ var SoundActions = {
             text: text
         });
     },
-    PlaySong:function(trackLink,trackName,id)
+    PlaySong:function(trackLink,trackName,id,orderId)
   {
 
             AppDispatcher.dispatch({
                 actionType: ActionTypes.PlaySong,
                 trackLink: trackLink,
                 trackName: trackName,
-                id:id
+                id:id,
+                orderId:orderId
 
             });
   },
@@ -48,25 +47,36 @@ getVis:function(trackId)
             actionType: ActionTypes.GetVis,
             trackId: trackId
 
-        });
+                  });
 },
 searchTracks:function(searchText)
 {
-  alert("Action")
   AppDispatcher.dispatch({
       actionType: ActionTypes.searchTracks,
       searchText: searchText
 
   });
 
-}
+},
+
+setSearchCriteria:function(searchCriteria)
+{
+  AppDispatcher.dispatch({
+      actionType: ActionTypes.setSearchCriteria,
+      searchCriteria: searchCriteria
+
+  });
 
 
+},
+searchUser:function(searchText){
 
+AppDispatcher.dispatch({
+   actionType:ActionTypes.searchUsers,
+   searchText:searchText
+})
 
-
-
-
+},
 
 }
 module.exports=SoundActions

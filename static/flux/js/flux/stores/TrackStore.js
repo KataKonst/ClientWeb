@@ -1,11 +1,11 @@
 var CHANGE_EVENT = 'change';
 
-var _todos = {};
 var trackLink
 var trackName
 var viz;
 var trackId
 var searchText
+var currentPosition
 
 
 
@@ -22,14 +22,17 @@ var ADD_VIZ_EVENT = 'ADD_VIZ_EVENT';
 var SEARCH_TRACKS_EVENT = 'SEARCH_TRACKS_EVENT';
 
 var divid
+var trackId
 
 var $=require('jquery')
 
-function setPlaySong(strackName,strackId,_div)
+var pOrderId
+function setPlaySong(strackName,strackId,_div,OrderId)
 {
   trackLink=strackId;
   trackName=strackName;
   divid=_div;
+  pOrderId=orderId
   TrackStore.emitPlayEvent();
 }
 
@@ -149,6 +152,18 @@ removGetVisListener:function(callback)
   getSearchText:function()
   {
     return searchText
+  },
+  getTrackId:function()
+  {
+    return divid;
+  },
+  getViewTrackId:function()
+  {
+    return trackId;
+  },
+  getOrderId:function()
+  {
+    return pOrderId;
   }
 });
 
@@ -166,7 +181,8 @@ removGetVisListener:function(callback)
             trackNme=action.trackName
             trackd=action.trackLink
             divid=action.id
-            setPlaySong(trackNme,trackd)
+            orderId=action.orderId
+            setPlaySong(trackNme,trackd,divid,orderId)
         break;
 
     case ActionTypes.AddVis:

@@ -11,9 +11,9 @@ playListRoutes = Blueprint('playListRoutes', __name__,
 ip=Constants.getServer()
 @playListRoutes.route('/createPlayList')
 def createPlayList():
-     playListName= flask.request.args.get('playListName')
+     playListName= flask.request.args.get('nume')
      userId= flask.request.args.get('userId')
-     parameters={'userId':userId,'playListName':playListName}
+     parameters={'userId':userId,'nume':playListName}
      req = requests.get(ip+":8080/createPlayList",params=parameters);
      return  req.text
 
@@ -42,3 +42,16 @@ def addToPLayList():
 def getPlayLists():
      req = requests.post(ip+":8080/playlist")
      return  req.text
+
+@playListRoutes.route('/getUserPlayLists')
+def getUserPlayLists():
+     userId = flask.request.args.get('userId')
+     parameters={'userId':userId}
+     req = requests.get(ip+":8080/userPlayLists",params=parameters)
+     print(ip+"/userPlayLists")
+
+     return  req.text
+
+
+
+

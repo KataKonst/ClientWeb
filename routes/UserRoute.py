@@ -27,3 +27,10 @@ def registerRoute():
 @userRoutes.route('/getUserId')
 def getUserId():
     return   flask.ext.login.current_user.id
+
+@userRoutes.route('/searchUser')
+def searchUserrId():
+       searchText = flask.request.args.get('searchText')
+       parameters={'searchText':searchText}
+       req= requests.get(ip+':8080/searchUser',params=parameters)
+       return  req.text

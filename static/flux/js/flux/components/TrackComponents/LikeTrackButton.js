@@ -30,8 +30,9 @@ var LikeTrackButton = React.createClass({
   },
   likeTrackClick:function()
   {
-    alert(1)
     LikesActions.likeTrack(this.props.userId,this.props.trackId);
+    LikesActions.getTrackNrLikes(this.props.trackId)
+
   },
   showLikesNr:function(){
     if(this.props.trackId==LikeStore.getTrackId())
@@ -45,8 +46,8 @@ var LikeTrackButton = React.createClass({
 
            <div>
 
-           <button className={"button button-glow button-circle button-action button-jumbo"}><i className={"fa fa-thumbs-up"}></i></button>
-
+           <button className={"button button-glow button-circle button-action button-jumbo"}><i className={"fa fa-thumbs-up"} onClick={this.likeTrackClick}></i></button>
+           <p>{this.state.likesNr}</p>
            </div>
 
      )

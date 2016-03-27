@@ -10,9 +10,7 @@ var AudioTrackPlayer=require('./AudioTrackPlayer')
                          tracks: React.PropTypes.array.isRequired,
                          sectionTracks : React.PropTypes.string.isRequired,
                          playLists:React.PropTypes.array.isRequired,
-                         userId:React.PropTypes.string.isRequired,
-                         searchText:React.PropTypes.string.isRequired
-
+                         userId:React.PropTypes.string.isRequired
             },
             getInitialState:function(){
               return({
@@ -29,16 +27,21 @@ var AudioTrackPlayer=require('./AudioTrackPlayer')
             var playLists=this.props.playLists
             var usrId=this.props.userId
             console.log(this.props.searchText)
-var scj=this.props.searchText;
 var i=0;
           tracks.forEach(function(entry) {
 i++;
-            tracksToDisplay.push(<div><AudioTrackPlayer   sectionTracks={ sectionTracks } link={entry["link"]} id={entry["id"]} name={entry["nume"]} playLists={playLists} userId={usrId} photoLink={entry["photoLink"]}/></div>)
+            tracksToDisplay.push(
+
+              <li><AudioTrackPlayer  orderId={i}sectionTracks={ sectionTracks } link={entry["link"]} id={entry["id"]} name={entry["nume"]} playLists={playLists} userId={usrId} photoLink={entry["photoLink"]}/></li>)
+console.log(entry["link"])
+
             });
           return (
                 <section id="main">
                 <p>{this.props.searchText}</p>
+                <ul>
                   {tracksToDisplay}
+                  </ul>
                 </section>
            );
          }

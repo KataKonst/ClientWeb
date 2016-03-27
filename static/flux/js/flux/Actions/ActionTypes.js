@@ -26,6 +26,12 @@ ActionTypes.GetUsersWhoLikedTrack="GetUsersWhoLikedTrack"
 ActionTypes.GetUserDetailsEvent="GET_USER_DETAILS_EVENT"
 ActionTypes.ShowUserProfile="ShowUserProfile"
 ActionTypes.searchTracks="searchTracks"
+ActionTypes.searchUsers="searchUsers"
+ActionTypes.setSearchCriteria="setSearchCriteria"
+ActionTypes.navigateTrack="navigateTrack"
+ActionTypes.playListsOfUser="playListsOfUser"
+
+
 
 
 

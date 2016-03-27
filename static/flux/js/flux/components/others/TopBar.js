@@ -4,6 +4,8 @@ var Locations = Router.Locations
 var Location = Router.Location
 var Link = Router.Link
 var SoundActions=require('../../Actions/SoundActions')
+var searchCriteria;
+var SearchStore=require('../../stores/SearchStore')
 
 
 
@@ -14,7 +16,13 @@ var TopBar=React.createClass({
          photoLink:React.PropTypes.string
      },
     componentDidMount: function() {
+      SearchStore.addSearchCriteriaListener(this.setSearchCriteria)
 
+    },
+    setSearchCriteria:function()
+    {
+
+      searchCriteria=SearchStore.getSearchCriteria();
     },
     showProfile:function()
     {
@@ -23,8 +31,17 @@ var TopBar=React.createClass({
     search:function()
     {
       var search=document.getElementById("search")
+
+      if(searchCriteria=="users")
+      {
+
+        SoundActions.searchUser(search.value)
+
+      }
+      else{
          SoundActions.searchTracks(search.value)
-         
+       }
+
     },
     render:function()
     {
@@ -44,6 +61,9 @@ var TopBar=React.createClass({
               <span className={"icon"}><i className={"fa fa-search "} id={"searchBut"} onClick={this.search} ></i></span>
             <li>  <img src={"http://www.urban.ro/data/Image1/skrillex.jpg"} alt={""}  height="22" width="42" onClick={this.showProfile}/></li>
             <li>  <Link href= {"/profile/0"}> Profile</Link></li>
+            <li>  <Link href= {"/playLists/0"}> PlayLists</Link></li>
+
+
 
               </div>
               </div>

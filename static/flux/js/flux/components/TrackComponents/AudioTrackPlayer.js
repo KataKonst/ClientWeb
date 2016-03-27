@@ -9,6 +9,7 @@ var PLayListStore=require('../../stores/PlayListStore')
 var CommentList=require('../CommentComponents/CommentList')
 var TrackStore=require('../../stores/TrackStore')
 var PlayListActions=require('../../Actions/PlayListActions')
+var LikesActions=require('../../Actions/LikesActions')
 var CommentActions=require('../../Actions/CommentActions')
 var SoundActions=require('../../Actions/SoundActions')
 var AddToPlayLists=require('../PlayListComponents/AddToPlayLists')
@@ -35,6 +36,7 @@ var AudioTrackPlayer = React.createClass({
       sectionTracks :React.PropTypes.string.isRequired,
       userId:React.PropTypes.string.isRequired,
       photoLink:React.PropTypes.string.isRequired,
+      orderId:React.PropTypes.string.isRequired
   },
 
     getInitialState: function() {
@@ -50,6 +52,7 @@ var AudioTrackPlayer = React.createClass({
         userId:this.props.userId,
         photoLink:this.props.photoLink,
         views:"0",
+        likesNr:"0",
         isPlay:false
 
     }
@@ -81,7 +84,6 @@ var AudioTrackPlayer = React.createClass({
     playLis:function()
     {
       var fix=document.getElementById("FixedPlayer")
-alert("1")
       fix.removeEventListener('timeupdate',this.playListener )
 
     },
@@ -91,9 +93,6 @@ alert("1")
 
       var fix=document.getElementById("FixedPlayer")
       document.getElementById(id).setAttribute("value", fix.currentTime / fix.duration);
-
-
-
 
     },
 
@@ -117,10 +116,18 @@ alert("1")
       TrackStore.removGetVisListener(this.setViews)
       TrackStore.removePLayListener(this.playLis)
     },
+    setLikesNr:function()
+    {
+      if(this.state.id==TrackStore.getViewTrackId())
+          {
+            this.setState({likesNr:TrackStore.getNrLikes()})
+          }
+    },
 
     setViews:function()
     {
-             if(this.state.id==TrackStore.getTrackId())
+
+             if(this.state.id==TrackStore.getViewTrackId())
                  {
                    this.setState({views:TrackStore.getViews()})
                  }
@@ -152,7 +159,7 @@ alert("1")
       if(this.state.isPlay==false){
       SoundActions.addVis(this.state.id)
       var id="t"+this.state.id
-      SoundActions.PlaySong(this.state.link,this.state.name,id)
+      SoundActions.PlaySong(this.state.link,this.state.name,id,this.props.orderId)
       var fix=document.getElementById("FixedPlayer")
        fix.addEventListener('timeupdate',this.playListener )
         }
@@ -164,8 +171,9 @@ alert("1")
       var fix=document.getElementById("FixedPlayer")
 
       var value_clicked = (e.nativeEvent.offsetX/160)*fix.duration;
-console.log(value_clicked)
+if(TrackStore.getTrackId().substring(1)==this.state.id){
       fix.currentTime=value_clicked;
+    }
 
 
     },
@@ -187,20 +195,24 @@ console.log(value_clicked)
 
 var lnk="/track/ss?id="+this.state.id+"&photoLink="+this.state.photoLink+"&trackLink="+this.state.link+"&trackName="+name+"&userId="+this.state.userId;
         return (
-              <section id="player">
-              <img src={photoLink} height="42" width="42"/>
+              <section className={"trackPlayer"}>
+              <div id={"imgdiv"}>
+              <img src={photoLink} height="122" width="122"/>
+              </div>
+              <div id={"buttonsPanel"}>
                    <p>{this.state.views}</p>
-              <Link href= {lnk}> user page</Link>.
+              <Link href= {lnk} className={"button button-3d button-action button-pill"}> user page</Link>.
               <div>  <AudioPlayerBB trackUrl={link} /> </div>
               <progress  id={id} value={"0"} max={"1"}  onClick={this.progressBar}></progress>
 
-            <input type="button"  className={ clss } onClick={this.playClick} value="Play"  />
+                <input type="button"  className={ "button button-glow button-border button-rounded button-primary" } onClick={this.playClick} value="Play"  />
 
-                  <input type="button"  className={ clss } onClick={this.showComment} value="ShowComment"  />
-                  <input type="button"  className={ clss } onClick={this.showLists} value="addToLists"  />
+                  <input type="button"  className={"button button-glow button-rounded button-caution"} onClick={this.showLists} value="addToLists"  />
                   <LikeTrackButton userId={this.state.userId} trackId={this.state.id} />
+
                   { this.state.show ? <CommentList comments={this.state.comments} trackId={this.state.id} userId={this.state.userId} /> : null }
                   { this.state.showPlayList ? < PlayListModal playLists={this.state.playLists} trackId={this.state.id} sectionTracks={this.state.sectionTracks} /> : null }
+                </div>
               </section>
         );
       }

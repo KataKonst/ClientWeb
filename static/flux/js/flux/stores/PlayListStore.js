@@ -1,9 +1,7 @@
 /**
  * Created by katakonst on 3/13/16.
  */
-/**
- * Created by katakonst on 3/13/16.
- */
+
 
 
 var LIST_EVENT_TRACKS="listEventTracks";
@@ -12,9 +10,12 @@ var ADD_TRACK_EVENT="ADD_TRACK_EVENT"
 var CREATE_LIST_EVENT="CREATE_LIST_EVENT"
 var SHOW_PLAY_LIST_EVENT="SHOW_PLAY_LIST_EVENT"
 var HIDE_PLAY_LIST_EVENT="HIDE_PLAY_LIST_EVENT"
+var GET_USER_PLAYLIST_EVENT="HIDE_PLAY_LIST_EVENT"
+
 
 
 var ActionTypes=require('../Actions/ActionTypes')
+var PlayListActions=require('../Actions/PlayListActions')
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var $=require('jquery')
 var  tracks = {}
@@ -27,7 +28,10 @@ var playListId=0;
 
 function  createPlayList(userId,trackId,sectionTracks,playListName)
  {
-     $.getJSON( "/createPlayList?userId="+encodeURIComponent(userId)+"&nume="+encodeURIComponent(playListName)+"&trackId="+encodeURIComponent(trackId), function( data ) {
+
+     $.get( "/createPlayList?userId="+encodeURIComponent(userId)+"&nume="+encodeURIComponent(playListName)+"&trackId="+encodeURIComponent(trackId), function( data ) {
+       PlayListActions.getPlayListsUsers(userId)
+
 
      });
  };
@@ -82,6 +86,17 @@ function   hidePlayList(trackId,sectionTracks)
 
 }
 
+function getUsersPlayLists(userId)
+{
+
+  $.getJSON( "/getUserPlayLists?userId="+encodeURIComponent(userId), function( data ) {
+        playList=data;
+        console.log(data.length)
+        PLayListStore.emitGetUserPlayList()
+    });
+
+}
+
 
 
 
@@ -90,6 +105,19 @@ function   hidePlayList(trackId,sectionTracks)
 
 var PLayListStore = Object.assign({}, EventEmitter.prototype, {
 
+    emitGetUserPlayList:function()
+    {
+
+      this.emit(GET_USER_PLAYLIST_EVENT);
+    },
+    addGetUserPlayListListener:function(callback)
+    {
+      this.addListener(GET_USER_PLAYLIST_EVENT,callback);
+    },
+    removeGetUserPlayListListener:function(callback)
+    {
+      this.removeListener(GET_USER_PLAYLIST_EVENT,callback)
+    },
     emitCreate:function()
     {
         this.emit(CREATE_LIST_EVENT)
@@ -216,6 +244,7 @@ var PLayListStore = Object.assign({}, EventEmitter.prototype, {
              var trackId = action.trackId;
              var playId = action.playId;
              listTracksPlayList(trackId,section,playId)
+             break
 
          case  ActionTypes.showPlayList:
              var section=action.section;
@@ -228,6 +257,11 @@ var PLayListStore = Object.assign({}, EventEmitter.prototype, {
             var trackId=action.trackId;
             hidePlayList(trackId,section)
             break;
+
+            case  ActionTypes.playListsOfUser:
+                var userId=action.trackId;
+                getUsersPlayLists(userId)
+                break;
 
          default:
   }

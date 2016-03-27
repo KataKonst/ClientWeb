@@ -25,7 +25,7 @@ var ReactDOM=require('react-dom')
 
 
                ReactDOM.render(<AppRoute/>,  document.getElementById('tracks'));
-                  ReactDOM.render(<FixedPlayer/>,  document.getElementById('rt'));
+                  ReactDOM.render(<FixedPlayer className={"fixedPlayer"}/>,  document.getElementById('rt'));
                   ReactDOM.render(<TopBar userId={id}/>,  document.getElementById('navbar'));
 
 

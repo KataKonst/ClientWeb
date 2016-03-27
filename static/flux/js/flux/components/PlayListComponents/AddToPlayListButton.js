@@ -38,7 +38,8 @@ var PlayListActions=require('../../Actions/PlayListActions')
         var clss="matchButton btnMatch"
            return (
                    <section id="addToPlayList">
-                       <input type="button"  className={ clss } onClick={this.handleClick} value="add"/>
+
+                   <button className={"button button-circle button-tiny"} onClick={this.handleClick}><i className={"fa fa-plus"}></i></button>
                    </section>);
     },
 

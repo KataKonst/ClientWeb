@@ -2,6 +2,8 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Modal = require('react-modal');
 var PlayListActions=require('../Actions/PlayListActions')
+var AddToPlayLists=require('./PlayListComponents/AddToPlayLists')
+
 
 var appElement = document.getElementById('modal');
 

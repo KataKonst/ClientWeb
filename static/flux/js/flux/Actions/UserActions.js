@@ -19,7 +19,7 @@ var UserActions={
           userId: userId
       });
 
-  },
+  }
 
 
 }

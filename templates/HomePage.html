@@ -8,6 +8,8 @@
 
       <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/audioplayer.css') }}">
             <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/buttons.css') }}">
+                  <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/customcss.css') }}">
+
 
             <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/hover.css') }}">
             <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/comment.css') }}">
@@ -45,6 +47,13 @@
 
       <style>
 
+
+.fixedPlayer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
             ul#horizontal li {
     display:inline;
 }
@@ -53,9 +62,9 @@
           .centered {
               position: absolute;
                left: 30%;
-              right:20%;
               top:10%;
-              width:40%;
+              right:90%;
+              width:100%;
 }
           .pacpac {
     bottom: initial;
@@ -64,7 +73,7 @@
           #loadResults{ float: right;  }
                     .playe{ width: 500px;  }
 
-          #tracks{  float: left; }
+
           #playe{  margin: auto; }
              .boss{
 width: 1000px;
@@ -87,6 +96,23 @@ margin: 0 auto;
                 top:1250%;
 
 }
+
+              .trackPlayer
+              {
+                   display:block;
+                  vertical-align:middle;
+
+              }
+
+
+          #imgdiv
+          {
+ display:inline-block;
+          }
+          #buttonsPanel
+          {
+ display:inline-block;
+          }
 
       </style>
 
@@ -114,7 +140,7 @@ margin: 0 auto;
     .hidden { display:none; }
 </style>
   <div class="panel boss" >
-  <div id="tracks" class="centered">
+  <div id="tracks">
 
   </div>
 
@@ -129,6 +155,22 @@ margin: 0 auto;
   <div id="modal">
       </div>
 <Style>
+    .rightNav{
+        position: absolute;
+        left:-15%;
+        top:20%;
+    }
+
+    .userSearchBut{
+        margin-top:30px
+
+    }
+
+    .searchUser{
+        position: relative;
+        top:20%
+    }
+
   .clickable {
     border: 1px solid #333;
     background: #eee;
@@ -156,7 +198,7 @@ margin: 0 auto;
 
 
 
-  <div id="rt">boss</div>
+  <div id="rt" class="fixedPlayer">boss</div>
   </body>
   <script src="static/js/bundle.js"></script>
 

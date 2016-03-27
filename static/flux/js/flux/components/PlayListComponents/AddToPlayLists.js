@@ -42,4 +42,3 @@ var AddToPlayLists = React.createClass({
           },
      });
 module.exports=AddToPlayLists
-window.AddToPlayLists = AddToPlayLists;

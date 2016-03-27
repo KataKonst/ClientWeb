@@ -1,0 +1,28 @@
+#userPLayList{
+
+    float:left
+}
+#createPlayInput{
+left:20%}
+
+#playListPage
+{
+    position:absolute;
+    top:20%;
+         float:left;
+    display:inline;
+
+
+
+}
+ .playButton{
+     display:inline-block;
+     margin-top:30px
+
+ }
+
+ #playListTracks{
+     float:left;
+     display:inline;
+
+ }

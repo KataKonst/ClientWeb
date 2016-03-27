@@ -7,6 +7,8 @@ var Link = Router.Link
 var Track =require("../TrackComponents/Track")
 var HomePage =require("./HomePage")
 var Profile =require("../UserComponents/Profile")
+var PlayListsPage =require("../PlayListComponents/PlayListsPage")
+
 
 
 
@@ -18,6 +20,8 @@ var AppRoute = React.createClass({
       <Location path="/track/:trackId" handler={Track} />
       <Location path="/" handler={HomePage} />
       <Location path="/profile/:userId" handler={Profile} />
+      <Location path="/playLists/:userId" handler={PlayListsPage} />
+
 
       </Locations>
     )

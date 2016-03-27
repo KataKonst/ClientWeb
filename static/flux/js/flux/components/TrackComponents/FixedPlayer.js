@@ -41,10 +41,12 @@ var TrackStore=require('../../stores/TrackStore')
             alert("ss")
 
 
-this.setState({trackName:TrackStore.getTrackName(),trackLink:TrackStore.getTrackLink()})
+this.setState({trackName:TrackStore.getTrackName(),trackLink:TrackStore.getTrackLink()},function(e){
 var audo = document.getElementById('FixedPlayer');
 audo.src='http://127.0.0.1:2000/'+this.state.trackLink
 audo.load()
+audo.play();
+});
 
           },
 
@@ -58,6 +60,9 @@ audo.load()
 
               return (
                        <section id="match">
+                       <input type="button"  className={"button button-glow button-rounded button-caution"} onClick={this.showLists} value="back"  />
+                       <input type="button"  className={"button button-glow button-rounded button-caution"} onClick={this.showLists} value="forward"  />
+
                        <audio controls className={"pacpac"} id="FixedPlayer">
 
                             <source src={url}/>
