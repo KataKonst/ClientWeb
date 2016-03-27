@@ -49,6 +49,17 @@ def getUserPlayLists():
      parameters={'userId':userId}
      req = requests.get(ip+":8080/userPlayLists",params=parameters)
      print(ip+"/userPlayLists")
+     return  req.text
+
+@playListRoutes.route('/deletePlayList')
+def deletePlayLists():
+     playId=flask.request.args.get('playId')
+     parameters={'playId':playId}
+     req = requests.get(ip+":8080/deletePlayList",params=parameters)
+
+
+
+
 
      return  req.text
 

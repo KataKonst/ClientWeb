@@ -47,13 +47,14 @@ var AudioTrackPlayer = React.createClass({
         id: this.props.id,
         show:false,
         showPlayList:false,
-        playLists: this.props.playLists,
+        playLists: [],
         sectionTracks:this.props.sectionTracks,
         userId:this.props.userId,
         photoLink:this.props.photoLink,
         views:"0",
         likesNr:"0",
-        isPlay:false
+        isPlay:false,
+        playBut:"Play",
 
     }
     },
@@ -83,8 +84,21 @@ var AudioTrackPlayer = React.createClass({
     },
     playLis:function()
     {
-      var fix=document.getElementById("FixedPlayer")
-      fix.removeEventListener('timeupdate',this.playListener )
+      if(TrackStore.getTrackId().substring(1)!=this.state.id)
+      {
+        this.setState({playBut:"Play",isPlay:false})
+        var fix=document.getElementById("FixedPlayer")
+        fix.removeEventListener('timeupdate',this.playListener )
+      }
+      else {
+         var fix=document.getElementById("FixedPlayer")
+         fix.addEventListener('timeupdate',this.playListener )
+         this.setState({playBut:"Pause",isPlay:true})
+         alert("sss")
+
+      }
+
+
 
     },
     playListener:function(e)
@@ -107,6 +121,8 @@ var AudioTrackPlayer = React.createClass({
           TrackStore.addGetVisListener(this.setViews);
           SoundActions.getVis(this.state.id);
           TrackStore.addPLayListener(this.playLis)
+          PLayListStore.addGetUserPlayListListener(this.showUserPlayLists)
+          PlayListActions.getPlayListsUsers(this.state.userId)
     },
 
     componentWillUnmount: function() {
@@ -116,6 +132,12 @@ var AudioTrackPlayer = React.createClass({
       TrackStore.removGetVisListener(this.setViews)
       TrackStore.removePLayListener(this.playLis)
     },
+    showUserPlayLists:function()
+    {
+      this.setState({playLists: PLayListStore.getPlayLists()})
+alert(PLayListStore.getPlayLists().length)
+    },
+
     setLikesNr:function()
     {
       if(this.state.id==TrackStore.getViewTrackId())
@@ -157,12 +179,32 @@ var AudioTrackPlayer = React.createClass({
     playClick:function()
     {
       if(this.state.isPlay==false){
+
       SoundActions.addVis(this.state.id)
       var id="t"+this.state.id
       SoundActions.PlaySong(this.state.link,this.state.name,id,this.props.orderId)
       var fix=document.getElementById("FixedPlayer")
        fix.addEventListener('timeupdate',this.playListener )
-        }
+       this.setState({playBut:"Pause",isPlay:true})
+      }
+      else if(this.state.playBut=="Pause") {
+        var fix=document.getElementById("FixedPlayer")
+        fix.pause()
+        this.setState({playBut:"Play"})
+
+
+
+      }
+      else if(this.state.playBut=="Play") {
+        var fix=document.getElementById("FixedPlayer")
+        fix.play()
+        this.setState({playBut:"Pause"})
+
+
+
+      }
+
+
 
 
     },
@@ -205,7 +247,7 @@ var lnk="/track/ss?id="+this.state.id+"&photoLink="+this.state.photoLink+"&track
               <div>  <AudioPlayerBB trackUrl={link} /> </div>
               <progress  id={id} value={"0"} max={"1"}  onClick={this.progressBar}></progress>
 
-                <input type="button"  className={ "button button-glow button-border button-rounded button-primary" } onClick={this.playClick} value="Play"  />
+            <input type="button"  className={ "button button-glow button-border button-rounded button-primary" } onClick={this.playClick} value={this.state.playBut}  />
 
                   <input type="button"  className={"button button-glow button-rounded button-caution"} onClick={this.showLists} value="addToLists"  />
                   <LikeTrackButton userId={this.state.userId} trackId={this.state.id} />

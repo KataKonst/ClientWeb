@@ -77,6 +77,29 @@ AppDispatcher.dispatch({
 })
 
 },
+forward:function(){
+AppDispatcher.dispatch({
+   actionType:ActionTypes.forward,
+})
+
+},
+backward:function(){
+  console.log("ss")
+
+AppDispatcher.dispatch({
+   actionType:ActionTypes.backward,
+})
+
+},
+
+setTracks:function(tracks){
+
+  AppDispatcher.dispatch({
+     actionType:ActionTypes.setTracks,
+     tracks:tracks
+   })
+
+},
 
 }
 module.exports=SoundActions

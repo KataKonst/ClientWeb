@@ -27,12 +27,13 @@ var trackId
 var $=require('jquery')
 
 var pOrderId
+
 function setPlaySong(strackName,strackId,_div,OrderId)
 {
   trackLink=strackId;
   trackName=strackName;
   divid=_div;
-  pOrderId=orderId
+  pOrderId=OrderId
   TrackStore.emitPlayEvent();
 }
 
@@ -70,6 +71,35 @@ function searchTracks(pSearchText)
      })
 
 }
+function setTracks(tracks)
+{
+  trackSearchResults=tracks
+}
+
+function forwardSong(){
+pOrderId=pOrderId+1
+console.log(pOrderId)
+trackLink=trackSearchResults[pOrderId]['link'];
+trackName=trackSearchResults[pOrderId]['nume']
+divid="t"+trackSearchResults[pOrderId]['id']
+TrackStore.emitPlayEvent();
+
+
+
+
+
+}
+
+function backwardSong(){
+pOrderId=pOrderId-1
+console.log(pOrderId)
+trackLink=trackSearchResults[pOrderId]['link'];
+trackName=trackSearchResults[pOrderId]['nume']
+divid="t"+trackSearchResults[pOrderId]['id']
+TrackStore.emitPlayEvent();
+
+}
+
 
 
 var TrackStore = Object.assign({}, EventEmitter.prototype, {
@@ -195,11 +225,24 @@ removGetVisListener:function(callback)
            getVis(trackd)
           break
 
-    case ActionTypes.searchTracks:
+  case ActionTypes.searchTracks:
 
          text=action.searchText
          searchTracks(text);
          break
+   case ActionTypes.forward:
+       forwardSong();
+       break
+   case ActionTypes.backward:
+       backwardSong()
+       break
+  case ActionTypes.setTracks:
+  console.log("setStore")
+
+  tracks=action.tracks
+    setTracks(tracks)
+  break
+
     default:
   }
 });

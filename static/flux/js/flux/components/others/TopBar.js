@@ -60,8 +60,8 @@ var TopBar=React.createClass({
               <input type={"search"} id={"search"} placeholder={"Search..."} />
               <span className={"icon"}><i className={"fa fa-search "} id={"searchBut"} onClick={this.search} ></i></span>
             <li>  <img src={"http://www.urban.ro/data/Image1/skrillex.jpg"} alt={""}  height="22" width="42" onClick={this.showProfile}/></li>
-            <li>  <Link href= {"/profile/0"}> Profile</Link></li>
-            <li>  <Link href= {"/playLists/0"}> PlayLists</Link></li>
+            <li>  <Link href= {"/profile/1"}> Profile</Link></li>
+            <li>  <Link href= {"/playLists/1"}> PlayLists</Link></li>
 
 
 

@@ -29,13 +29,14 @@ var AudioTrackPlayer=require('./AudioTrackPlayer')
             console.log(this.props.searchText)
 var i=0;
           tracks.forEach(function(entry) {
-i++;
+
             tracksToDisplay.push(
 
-              <li><AudioTrackPlayer  orderId={i}sectionTracks={ sectionTracks } link={entry["link"]} id={entry["id"]} name={entry["nume"]} playLists={playLists} userId={usrId} photoLink={entry["photoLink"]}/></li>)
+              <li><AudioTrackPlayer  orderId={i} sectionTracks={ sectionTracks } link={entry["link"]} id={entry["id"]} name={entry["nume"]} playLists={playLists} userId={usrId} photoLink={entry["photoLink"]}/></li>)
 console.log(entry["link"])
-
+    i++;
             });
+
           return (
                 <section id="main">
                 <p>{this.props.searchText}</p>

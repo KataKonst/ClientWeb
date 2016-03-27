@@ -13,7 +13,6 @@ var Boss=React.createClass({
   },
 clickPlayButton:function(e)
 {
-alert("1")
 },
 render:function(){
 

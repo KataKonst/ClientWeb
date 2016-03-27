@@ -36,10 +36,11 @@ var PlayListsPage=React.createClass({
   },
   componentWillUnmount:function()
   {
-      PlayListStore.removeGetUserPlayListListener(this.showUserPlayLists)
+    PlayListStore.removeGetUserPlayListListener(this.showUserPlayLists)
   },
   showUserPlayLists:function()
   {
+alert(1)
       this.setState({showUsPlay:true,playLists:PlayListStore.getPlayLists()})
   },
   render:function()

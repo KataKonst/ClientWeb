@@ -36,11 +36,19 @@ var TrackStore=require('../../stores/TrackStore')
 
           componentWillUnmount: function() {
           },
+          forward:function()
+          {
+SoundActions.forward()
+          },
+          backward:function()
+          {
+            SoundActions.backward()
+
+          },
           playListener:function()
           {
-            alert("ss")
 
-
+alert(1)
 this.setState({trackName:TrackStore.getTrackName(),trackLink:TrackStore.getTrackLink()},function(e){
 var audo = document.getElementById('FixedPlayer');
 audo.src='http://127.0.0.1:2000/'+this.state.trackLink
@@ -60,8 +68,8 @@ audo.play();
 
               return (
                        <section id="match">
-                       <input type="button"  className={"button button-glow button-rounded button-caution"} onClick={this.showLists} value="back"  />
-                       <input type="button"  className={"button button-glow button-rounded button-caution"} onClick={this.showLists} value="forward"  />
+                       <input type="button"  className={"button button-glow button-rounded button-caution"} onClick={this.backward} value="back"  />
+                       <input type="button"  className={"button button-glow button-rounded button-caution"} onClick={this.forward} value="forward"  />
 
                        <audio controls className={"pacpac"} id="FixedPlayer">
 

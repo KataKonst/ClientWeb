@@ -51,3 +51,19 @@ def getTrackNrLikes():
     parameters={'trackId':trackId}
     req = requests.get(ip+":8080/getTrackNrLikes?",params=parameters)
     return  req.text
+
+@likeRoutes.route('/checkUserLikedTrack')
+def checkUserLikedTrack():
+    trackId = flask.request.args.get('trackId')
+    userId = flask.request.args.get('userId')
+    parameters={'trackId':trackId,"userId":userId}
+    req = requests.get(ip+":8080/checkUserLikedTrack?",params=parameters)
+    return  req.text
+
+@likeRoutes.route('/unlike')
+def unlike():
+    trackId = flask.request.args.get('trackId')
+    userId = flask.request.args.get('userId')
+    parameters={'trackId':trackId,"userId":userId}
+    req = requests.get(ip+":8080/unlike?",params=parameters)
+    return  req.text

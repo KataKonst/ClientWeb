@@ -30,6 +30,11 @@ ActionTypes.searchUsers="searchUsers"
 ActionTypes.setSearchCriteria="setSearchCriteria"
 ActionTypes.navigateTrack="navigateTrack"
 ActionTypes.playListsOfUser="playListsOfUser"
+ActionTypes.forward="forward"
+ActionTypes.backward="backward"
+ActionTypes.setTracks="setTracks"
+ActionTypes.deletePlayList="deletePlayList"
+
 
 
 

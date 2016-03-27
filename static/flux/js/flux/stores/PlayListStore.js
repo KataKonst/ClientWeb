@@ -16,6 +16,7 @@ var GET_USER_PLAYLIST_EVENT="HIDE_PLAY_LIST_EVENT"
 
 var ActionTypes=require('../Actions/ActionTypes')
 var PlayListActions=require('../Actions/PlayListActions')
+var SoundActions=require('../Actions/SoundActions')
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var $=require('jquery')
 var  tracks = {}
@@ -43,8 +44,8 @@ function  listTracksPlayList(trackId,sectionTracks,playId)
          id=trackId;
          section=sectionTracks;
          tracks=data;
+         SoundActions.setTracks(tracks)
          playListId=playId;
-         alert(data[0]['id'])
          PLayListStore.emitListTrack();
      });
 }
@@ -91,9 +92,19 @@ function getUsersPlayLists(userId)
 
   $.getJSON( "/getUserPlayLists?userId="+encodeURIComponent(userId), function( data ) {
         playList=data;
+
         console.log(data.length)
         PLayListStore.emitGetUserPlayList()
     });
+
+}
+function deletePlayList(playId,userId)
+{
+
+  $.get( "/deletePlayList?playId="+encodeURIComponent(playId), function( data ) {
+          PlayListActions.getPlayListsUsers(userId)
+    });
+
 
 }
 
@@ -262,6 +273,14 @@ var PLayListStore = Object.assign({}, EventEmitter.prototype, {
                 var userId=action.trackId;
                 getUsersPlayLists(userId)
                 break;
+
+
+                case  ActionTypes.deletePlayList:
+                    var playListId=action.playId;
+                 var userId=action.userId
+                    deletePlayList(playListId,userId)
+                    break;
+
 
          default:
   }

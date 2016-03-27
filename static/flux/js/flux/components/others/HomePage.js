@@ -8,8 +8,13 @@ var TrackList = require('../TrackComponents/TrackList');
 var MatchStore = require('../../stores/MatchStore');
 var TrackStore = require('../../stores/TrackStore');
 var SearchStore = require('../../stores/SearchStore');
+var PlayListStore = require('../../stores/PlayListStore');
 var UserStore = require('../../stores/UserStore');
 var UserList = require('../UserComponents/UserList');
+var SoundActions = require('../../Actions/SoundActions');
+var PlayListActions = require('../../Actions/PlayListActions');
+
+
 
 
 
@@ -25,18 +30,18 @@ function  getTrackState(fnc){
     $.getJSON( "/tracksJson", function( tracksList ) {
 
 
-          $.getJSON( "/getPlayLists", function( data ) {
 
 
                $.getJSON("/getUserId",function(id){
                               tracks=tracksList;
+                              SoundActions.setTracks(tracksList)
                               sectionTracks="list";
-                              playLists=data;
+                              playLists=[];
                               userId=id
                               fnc(tracks,sectionTracks,playLists,userId);
 
                          });
-                   });
+
              });
         }
 
@@ -51,7 +56,13 @@ function  getTrackState(fnc){
               getTrackState(this.ch)
             TrackStore.addSearchTracksEvent(this.searchTracks)
             UserStore.addSearchUserListener(this.searchUser)
+        
+
             },
+            showUserPlayLists:function()
+            {
+            this.setState({playLists:PlayListStore.getTracks()})
+          },
             componentWillUnmount: function() {
             },
            searchUser:function()

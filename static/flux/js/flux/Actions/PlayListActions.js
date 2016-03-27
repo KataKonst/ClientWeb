@@ -80,6 +80,14 @@ var PlayListActions = {
            trackId: userId,
       });
 
+    },
+    deletePlayList:function(playId,userId)
+    {
+      AppDispatcher.dispatch({
+        actionType:ActionTypes.deletePlayList,
+        playId:playId,
+        userId:userId
+      })
     }
 
 
