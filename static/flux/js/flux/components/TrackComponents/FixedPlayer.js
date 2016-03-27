@@ -1,3 +1,6 @@
+
+
+
 /**
  * Created by katakonst on 3/13/16.
  */
@@ -48,7 +51,6 @@ SoundActions.forward()
           playListener:function()
           {
 
-alert(1)
 this.setState({trackName:TrackStore.getTrackName(),trackLink:TrackStore.getTrackLink()},function(e){
 var audo = document.getElementById('FixedPlayer');
 audo.src='http://127.0.0.1:2000/'+this.state.trackLink

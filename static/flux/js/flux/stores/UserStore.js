@@ -92,7 +92,6 @@ var UserStore=Object.assign({}, EventEmitter.prototype, {
              showUserProfile(userId);
          break
          case ActionTypes.searchUsers:
-         alert("bs")
 
                searchText=action.searchText
                searchUser(searchText)

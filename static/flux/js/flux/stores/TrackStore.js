@@ -243,6 +243,9 @@ removGetVisListener:function(callback)
     setTracks(tracks)
   break
 
+  case ActionTypes.checkUserLikedTrack:
+  break
+
     default:
   }
 });

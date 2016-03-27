@@ -40,7 +40,6 @@ var PlayListsPage=React.createClass({
   },
   showUserPlayLists:function()
   {
-alert(1)
       this.setState({showUsPlay:true,playLists:PlayListStore.getPlayLists()})
   },
   render:function()

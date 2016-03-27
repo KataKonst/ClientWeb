@@ -64,7 +64,6 @@ AppDispatcher.register(function(action) {
   switch(action.actionType) {
     case "match2":
       text = action.text;
-          alert(text+"s")
 
       if (text !== '') {
         match(text);

@@ -21,12 +21,21 @@ var LikesActions = {
           });
       },
       getUsersWhoLikedTrack: function (trackId) {
-        alert(trackId)
                 AppDispatcher.dispatch({
                   actionType: ActionTypes.GetUsersWhoLikedTrack,
                   trackId: trackId,
               });
           },
+      checkUserLikedTrack:function(userId,trackId)
+          {
+
+            AppDispatcher.dispatch({
+              actionType: ActionTypes.checkUserLikedTrack,
+              trackId: trackId,
+              userId:userId
+            });
+
+          }
 
 }
 

@@ -17,7 +17,6 @@ var CreatePlayListInput=React.createClass({
   createList:function()
    {
 
-alert(this.props.userId+"s")
      PlayListActions.CreatePlayList(0,"S",this.state.text,this.props.userId)
    },
    handleChange:function(event){

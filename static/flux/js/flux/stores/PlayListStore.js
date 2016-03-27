@@ -82,7 +82,6 @@ function   hidePlayList(trackId,sectionTracks)
 {
     id=trackId;
     section=sectionTracks;
-    alert(id+" "+section)
     PLayListStore.emitHidePlayLists();
 
 }

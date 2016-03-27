@@ -22,6 +22,9 @@ var Link = Router.Link
 var Track =require("./Track")
 var LikeTrackButton= require("./LikeTrackButton")
 var $=require('jquery')
+var ShowListButton=require('./ShowListButton')
+var PlayButton=require('./PlayButton')
+
 
 
 
@@ -68,56 +71,12 @@ var AudioTrackPlayer = React.createClass({
      },
 
 
-    showComment: function (e) {
-         if(this.state.show==false) {
-             CommentActions.ListComments(this.state.id, this.state.sectionTracks);
-         }
-         else {
-             this.setState({show: false});
-         }
-
-     },
-
-    showLists : function(e){
-        PlayListActions.showPlayLists(this.state.id, this.state.sectionTracks);
-
-    },
-    playLis:function()
-    {
-      if(TrackStore.getTrackId().substring(1)!=this.state.id)
-      {
-        this.setState({playBut:"Play",isPlay:false})
-        var fix=document.getElementById("FixedPlayer")
-        fix.removeEventListener('timeupdate',this.playListener )
-      }
-      else {
-         var fix=document.getElementById("FixedPlayer")
-         fix.addEventListener('timeupdate',this.playListener )
-         this.setState({playBut:"Pause",isPlay:true})
-         alert("sss")
-
-      }
-
-
-
-    },
-    playListener:function(e)
-    {
-      var id="t"+this.state.id
-
-      var fix=document.getElementById("FixedPlayer")
-      document.getElementById(id).setAttribute("value", fix.currentTime / fix.duration);
-
-    },
 
     onChange: function() {
 
     },
     componentDidMount: function() {
           TrackStore.addChangeListener(this._onChange);
-          CommentStore.addListCommentsListener(this.listCom)
-          PLayListStore.addShowPlayListsListener(this.listPLayLists)
-          PLayListStore.addHidePlayListListener(this.hidePlayList);
           TrackStore.addGetVisListener(this.setViews);
           SoundActions.getVis(this.state.id);
           TrackStore.addPLayListener(this.playLis)
@@ -126,16 +85,13 @@ var AudioTrackPlayer = React.createClass({
     },
 
     componentWillUnmount: function() {
-      CommentStore.removeListCommentsListener(this.listCom)
-      PLayListStore.removeShowPlayListsListener(this.listPLayLists)
-      PLayListStore.removeHidePlayListListener(this.hidePlayList)
       TrackStore.removGetVisListener(this.setViews)
       TrackStore.removePLayListener(this.playLis)
     },
     showUserPlayLists:function()
     {
       this.setState({playLists: PLayListStore.getPlayLists()})
-alert(PLayListStore.getPlayLists().length)
+
     },
 
     setLikesNr:function()
@@ -155,65 +111,13 @@ alert(PLayListStore.getPlayLists().length)
                  }
     },
 
-    listCom:function () {
-        if(CommentStore.getId()==this.state.id&&CommentStore.getSection()==this.state.sectionTracks) {
-                    this.setState({show: true,comments:CommentStore.getComments()});
-        }
-    },
-    listPLayLists: function(){
-        if(PLayListStore.getId()==this.state.id&&PLayListStore.getSection()==this.state.sectionTracks)
-        {
 
-            this.setState({showPlayList: true})
-        }
-
-    },
-    hidePlayList: function(){
-        if(PLayListStore.getId()==this.state.id&&PLayListStore.getSection()==this.state.sectionTracks)
-        {
-
-            this.setState({showPlayList: false})
-        }
-
-    },
-    playClick:function()
-    {
-      if(this.state.isPlay==false){
-
-      SoundActions.addVis(this.state.id)
-      var id="t"+this.state.id
-      SoundActions.PlaySong(this.state.link,this.state.name,id,this.props.orderId)
-      var fix=document.getElementById("FixedPlayer")
-       fix.addEventListener('timeupdate',this.playListener )
-       this.setState({playBut:"Pause",isPlay:true})
-      }
-      else if(this.state.playBut=="Pause") {
-        var fix=document.getElementById("FixedPlayer")
-        fix.pause()
-        this.setState({playBut:"Play"})
-
-
-
-      }
-      else if(this.state.playBut=="Play") {
-        var fix=document.getElementById("FixedPlayer")
-        fix.play()
-        this.setState({playBut:"Pause"})
-
-
-
-      }
-
-
-
-
-    },
     progressBar:function(e)
     {
       var fix=document.getElementById("FixedPlayer")
 
       var value_clicked = (e.nativeEvent.offsetX/160)*fix.duration;
-if(TrackStore.getTrackId().substring(1)==this.state.id){
+     if(TrackStore.getTrackId().substring(1)==this.state.id){
       fix.currentTime=value_clicked;
     }
 
@@ -237,6 +141,11 @@ if(TrackStore.getTrackId().substring(1)==this.state.id){
 
 var lnk="/track/ss?id="+this.state.id+"&photoLink="+this.state.photoLink+"&trackLink="+this.state.link+"&trackName="+name+"&userId="+this.state.userId;
         return (
+
+
+
+
+
               <section className={"trackPlayer"}>
               <div id={"imgdiv"}>
               <img src={photoLink} height="122" width="122"/>
@@ -246,14 +155,11 @@ var lnk="/track/ss?id="+this.state.id+"&photoLink="+this.state.photoLink+"&track
               <Link href= {lnk} className={"button button-3d button-action button-pill"}> user page</Link>.
               <div>  <AudioPlayerBB trackUrl={link} /> </div>
               <progress  id={id} value={"0"} max={"1"}  onClick={this.progressBar}></progress>
-
-            <input type="button"  className={ "button button-glow button-border button-rounded button-primary" } onClick={this.playClick} value={this.state.playBut}  />
-
-                  <input type="button"  className={"button button-glow button-rounded button-caution"} onClick={this.showLists} value="addToLists"  />
-                  <LikeTrackButton userId={this.state.userId} trackId={this.state.id} />
+              <PlayButton  userId={this.state.userId} trackId={this.state.id} trackLink={this.state.link} trackName={this.state.name} orderId={this.props.orderId}/>
+              <ShowListButton userId={this.state.userId} trackId={this.state.id} playLists={this.state.playLists}  sectionTracks={this.state.sectionTracks}/>
+              <LikeTrackButton userId={this.state.userId} trackId={this.state.id} />
 
                   { this.state.show ? <CommentList comments={this.state.comments} trackId={this.state.id} userId={this.state.userId} /> : null }
-                  { this.state.showPlayList ? < PlayListModal playLists={this.state.playLists} trackId={this.state.id} sectionTracks={this.state.sectionTracks} /> : null }
                 </div>
               </section>
         );
