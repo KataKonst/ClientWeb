@@ -137,8 +137,10 @@ var AudioTrackPlayer = React.createClass({
                 <Link href= {lnk} className={"button button-3d button-action button-pill"}> user page</Link>.
                 <progress  id={id} value={"0"} max={"1"}  onClick={this.progressBar}></progress>
                 <PlayButton  userId={this.state.userId} trackId={this.state.id} trackLink={this.state.link} trackName={this.state.name} orderId={this.props.orderId}/>
-                <ShowListButton userId={this.state.userId} trackId={this.state.id} playLists={this.state.playLists}  sectionTracks={this.state.sectionTracks}/>
+<div id={"bottomTrack"}>
+                 <ShowListButton userId={this.state.userId} trackId={this.state.id} playLists={this.state.playLists}  sectionTracks={this.state.sectionTracks}/>
                  <LikeTrackButton userId={this.state.userId} trackId={this.state.id} />
+</div>
                 </div>
               </section>
         );

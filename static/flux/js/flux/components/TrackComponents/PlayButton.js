@@ -18,7 +18,7 @@ var PlayButton=React.createClass({
   getInitialState:function()
   {
           return({
-            playBut:"Play",
+            playBut:true,
             isPlay:false
             })
   },
@@ -46,20 +46,20 @@ var PlayButton=React.createClass({
      SoundActions.PlaySong(this.props.trackLink,this.props.trackName,id,this.props.orderId)
      var fix=document.getElementById("FixedPlayer")
       fix.addEventListener('timeupdate',this.playListener )
-      this.setState({playBut:"Pause",isPlay:true})
+      this.setState({playBut:false,isPlay:true})
      }
-     else if(this.state.playBut=="Pause") {
+     else if(this.state.playBut==false) {
        var fix=document.getElementById("FixedPlayer")
        fix.pause()
-       this.setState({playBut:"Play"})
+       this.setState({playBut:true})
 
 
 
      }
-     else if(this.state.playBut=="Play") {
+     else if(this.state.playBut==true) {
        var fix=document.getElementById("FixedPlayer")
        fix.play()
-       this.setState({playBut:"Pause"})
+       this.setState({playBut:false})
      }
    },
    playListener:function(e)
@@ -76,14 +76,14 @@ var PlayButton=React.createClass({
      alert(TrackStore.getTrackId().substring(1)+" "+this.props.trackId)
      if(TrackStore.getTrackId().substring(1)!=this.props.trackId)
      {
-       this.setState({playBut:"Play",isPlay:false})
+       this.setState({playBut:true,isPlay:false})
        var fix=document.getElementById("FixedPlayer")
        fix.removeEventListener('timeupdate',this.playListener )
      }
      else {
         var fix=document.getElementById("FixedPlayer")
         fix.addEventListener('timeupdate',this.playListener )
-        this.setState({playBut:"Pause",isPlay:true})
+        this.setState({playBut:false,isPlay:true})
 
      }
 
@@ -92,10 +92,11 @@ var PlayButton=React.createClass({
    },
    render :function()
    {
-
+        var src=this.state.playBut? "/static/buttons/play.png":"/static/buttons/pause.png"
      return(
        <div>
-            <input type="button"  className={ "button button-glow button-border button-rounded button-primary" } onClick={this.playClick} value={this.state.playBut}  />
+       <img src={src} height="50" width="50" onClick={this.playClick} />
+
        </div>
      )
    }

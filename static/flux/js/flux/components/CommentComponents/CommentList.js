@@ -43,7 +43,12 @@ function  getComments()
 
          for(var i in coms){
            console.log(coms[i]["Text"])
-          coments.push(<Comment userName={commentId={coms[i]["id"]} coms[i]["authorName"]} commentText={coms[i]["Text"]} photoLink={coms[i]["photoLink"]}/>)
+          coments.push(<Comment
+            userName={coms[i]["authorName"]}
+              commentId={coms[i]["id"]}
+            
+             commentText={coms[i]["Text"]}
+             photoLink={coms[i]["photoLink"]}/>)
 
 
 

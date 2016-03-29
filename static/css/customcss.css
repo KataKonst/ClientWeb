@@ -26,3 +26,18 @@ left:20%}
      display:inline;
 
  }
+
+ .bottomTrack {
+     positin:relative;
+     width: 1000px
+ }
+ .ShowListButton{
+     float:left
+
+ }
+
+ .LikeTrackButton{
+   float: left;
+ }
+
+

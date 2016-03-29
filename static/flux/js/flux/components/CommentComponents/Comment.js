@@ -5,7 +5,7 @@ var Comment=React.createClass({
 
 propTypes:{
 
-  commentId:this.props.string
+  commentId:React.PropTypes.string.isRequired
 },
 
   getInitialState: function() {
