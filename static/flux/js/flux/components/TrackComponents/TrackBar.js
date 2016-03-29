@@ -26,6 +26,11 @@ showLikes:false
         CommentStore.addListCommentsListener(this.listCom)
         LikeStore.addUsersWhoLikedTrackListener(this.listLikes)
    },
+   componentWillUnmount:function(){
+     CommentStore.removeListCommentsListener(this.listCom)
+     LikeStore.removeUsersWhoLikedTrackListener(this.listLikes)
+
+   },
 
 
      showComment: function (e) {
@@ -64,7 +69,7 @@ showLikes:false
     <input type="button"  className={ "NavButton hvr-float" }  value="Show Recomended"  />
 
     { this.state.showLikes ? <UsersList key="s" users={this.state.userLikes} userId={this.state.userId} /> : null }
-    { this.state.showComment ? <CommentList comments={this.state.comments} trackId={this.props.trackId} userId={this.props.userId} /> : null }
+    { this.state.showComment ? <CommentList key={this.state.comments.length} comments={this.state.comments} trackId={this.props.trackId} userId={this.props.userId} /> : null }
 
 
 

@@ -25,16 +25,11 @@ var $=require('jquery')
 var ShowListButton=require('./ShowListButton')
 var PlayButton=require('./PlayButton')
 
-
-
-
-
-
 var AudioTrackPlayer = React.createClass({
 
   propTypes: {
-    name: React.PropTypes.string.isRequired,
-    link: React.PropTypes.string.isRequired,
+      name: React.PropTypes.string.isRequired,
+      link: React.PropTypes.string.isRequired,
       id: React.PropTypes.number.isRequired,
       sectionTracks :React.PropTypes.string.isRequired,
       userId:React.PropTypes.string.isRequired,
@@ -79,14 +74,12 @@ var AudioTrackPlayer = React.createClass({
           TrackStore.addChangeListener(this._onChange);
           TrackStore.addGetVisListener(this.setViews);
           SoundActions.getVis(this.state.id);
-          TrackStore.addPLayListener(this.playLis)
           PLayListStore.addGetUserPlayListListener(this.showUserPlayLists)
           PlayListActions.getPlayListsUsers(this.state.userId)
     },
 
     componentWillUnmount: function() {
       TrackStore.removGetVisListener(this.setViews)
-      TrackStore.removePLayListener(this.playLis)
     },
     showUserPlayLists:function()
     {
@@ -115,14 +108,11 @@ var AudioTrackPlayer = React.createClass({
     progressBar:function(e)
     {
       var fix=document.getElementById("FixedPlayer")
-
       var value_clicked = (e.nativeEvent.offsetX/160)*fix.duration;
      if(TrackStore.getTrackId().substring(1)==this.state.id){
-      fix.currentTime=value_clicked;
+        fix.currentTime=value_clicked;
     }
-
-
-    },
+  },
 
     render: function() {
         var link="http://127.0.0.1:2000/"+this.state.link ;
@@ -136,37 +126,22 @@ var AudioTrackPlayer = React.createClass({
           [{ url: link,
              displayText:name }]
              var id="t"+id;
-
-
-
-var lnk="/track/ss?id="+this.state.id+"&photoLink="+this.state.photoLink+"&trackLink="+this.state.link+"&trackName="+name+"&userId="+this.state.userId;
+       var lnk="/track/ss?id="+this.state.id+"&photoLink="+this.state.photoLink+"&trackLink="+this.state.link+"&trackName="+name+"&userId="+this.state.userId;
         return (
-
-
-
-
-
               <section className={"trackPlayer"}>
               <div id={"imgdiv"}>
               <img src={photoLink} height="122" width="122"/>
               </div>
               <div id={"buttonsPanel"}>
                    <p>{this.state.views}</p>
-              <Link href= {lnk} className={"button button-3d button-action button-pill"}> user page</Link>.
-              <div>  <AudioPlayerBB trackUrl={link} /> </div>
-              <progress  id={id} value={"0"} max={"1"}  onClick={this.progressBar}></progress>
-              <PlayButton  userId={this.state.userId} trackId={this.state.id} trackLink={this.state.link} trackName={this.state.name} orderId={this.props.orderId}/>
-              <ShowListButton userId={this.state.userId} trackId={this.state.id} playLists={this.state.playLists}  sectionTracks={this.state.sectionTracks}/>
-              <LikeTrackButton userId={this.state.userId} trackId={this.state.id} />
-
-                  { this.state.show ? <CommentList comments={this.state.comments} trackId={this.state.id} userId={this.state.userId} /> : null }
+                <Link href= {lnk} className={"button button-3d button-action button-pill"}> user page</Link>.
+                <progress  id={id} value={"0"} max={"1"}  onClick={this.progressBar}></progress>
+                <PlayButton  userId={this.state.userId} trackId={this.state.id} trackLink={this.state.link} trackName={this.state.name} orderId={this.props.orderId}/>
+                <ShowListButton userId={this.state.userId} trackId={this.state.id} playLists={this.state.playLists}  sectionTracks={this.state.sectionTracks}/>
+                 <LikeTrackButton userId={this.state.userId} trackId={this.state.id} />
                 </div>
               </section>
         );
       }
    });
-
-
-
-
 module.exports=AudioTrackPlayer

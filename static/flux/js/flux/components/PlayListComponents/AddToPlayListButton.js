@@ -7,15 +7,23 @@
 
 var React = require('react');
 var PlayListActions=require('../../Actions/PlayListActions')
+var TracksPlayListStore=require('../../stores/TracksPlayListStore')
 
  var AddToPlayListButton = React.createClass({
 
 
 
                 propTypes: {
-                         trackId: React.PropTypes.array.isRequired,
+                         trackId: React.PropTypes.string.isRequired,
                          sectionTracks : React.PropTypes.string.isRequired,
                          playId:React.PropTypes.array.isRequired
+            },
+            getInitialState:function()
+            {
+
+              return({
+                isTrackInList:false
+              })
             },
 
 
@@ -24,6 +32,20 @@ var PlayListActions=require('../../Actions/PlayListActions')
      },
 
     componentDidMount: function() {
+      TracksPlayListStore.addCheckTrackInPlayListListener(this.checkTrackInList)
+
+      PlayListActions.checkTrackInPlayList(this.props.playId,this.props.trackId)
+
+     },
+     checkTrackInList:function()
+     {
+       console.log(TracksPlayListStore.getTrackId()+" "+this.props.trackId)
+
+          if(TracksPlayListStore.getTrackId()==this.props.trackId)
+          {
+
+            this.setState({isTrackInList:TracksPlayListStore.isLiked()})
+          }
      },
 
     componentWillUnmount: function() {
@@ -33,13 +55,18 @@ var PlayListActions=require('../../Actions/PlayListActions')
     },
     handleChange:function(event){
     },
+    deleteTrack:function(e)
+    {
+    PlayListActions.deleteTrackFromPlayList(this.props.playId,this.props.trackId)
+  },
 
     render: function() {
         var clss="matchButton btnMatch"
            return (
                    <section id="addToPlayList">
 
-                   <button className={"button button-circle button-tiny"} onClick={this.handleClick}><i className={"fa fa-plus"}></i></button>
+                {this.state.isTrackInList? <input type={"button"} value={"delete"} onClick={this.deleteTrack}/>:
+                   <button className={"button button-circle button-tiny"} onClick={this.handleClick}><i className={"fa fa-plus"}></i></button>}
                    </section>);
     },
 

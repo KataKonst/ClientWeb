@@ -26,14 +26,24 @@ var LikesActions = {
                   trackId: trackId,
               });
           },
-      checkUserLikedTrack:function(userId,trackId)
+      checkUserLikedTrack:function(trackId,userId)
           {
 
             AppDispatcher.dispatch({
-              actionType: ActionTypes.checkUserLikedTrack,
+              actionType: ActionTypes.checkUserLikedTracks,
               trackId: trackId,
               userId:userId
             });
+
+          },
+          unLike:function(trackId,userId)
+          {
+
+              AppDispatcher.dispatch({
+                          actionType: ActionTypes.unlike,
+                          trackId: trackId,
+                          userId:userId
+                        });
 
           }
 

@@ -43,7 +43,7 @@ var PlayButton=React.createClass({
 
      SoundActions.addVis(this.props.trackId)
      var id="t"+this.props.trackId
-     SoundActions.PlaySong(this.props.link,this.props.name,id,this.props.orderId)
+     SoundActions.PlaySong(this.props.trackLink,this.props.trackName,id,this.props.orderId)
      var fix=document.getElementById("FixedPlayer")
       fix.addEventListener('timeupdate',this.playListener )
       this.setState({playBut:"Pause",isPlay:true})
@@ -64,7 +64,7 @@ var PlayButton=React.createClass({
    },
    playListener:function(e)
    {
-     var id="t"+this.state.id
+     var id="t"+this.props.trackId
 
      var fix=document.getElementById("FixedPlayer")
      document.getElementById(id).setAttribute("value", fix.currentTime / fix.duration);
@@ -73,6 +73,7 @@ var PlayButton=React.createClass({
 
    playLis:function()
    {
+     alert(TrackStore.getTrackId().substring(1)+" "+this.props.trackId)
      if(TrackStore.getTrackId().substring(1)!=this.props.trackId)
      {
        this.setState({playBut:"Play",isPlay:false})
@@ -105,3 +106,5 @@ var PlayButton=React.createClass({
 
 
 });
+
+module.exports=PlayButton

@@ -36,12 +36,14 @@ function  getComments()
             this.setState({text: event.target.value});
     },
      render: function() {
+       alert(this.state.comments.length)
         var clss="matchButton btnMatch"
         var coments=[]
         var coms=this.state.comments;
 
          for(var i in coms){
-          coments.push(<Comment userName={coms[i]["authorName"]} commentText={coms[i]["Text"]} photoLink={coms[i]["photoLink"]}/>)
+           console.log(coms[i]["Text"])
+          coments.push(<Comment userName={commentId={coms[i]["id"]} coms[i]["authorName"]} commentText={coms[i]["Text"]} photoLink={coms[i]["photoLink"]}/>)
 
 
 

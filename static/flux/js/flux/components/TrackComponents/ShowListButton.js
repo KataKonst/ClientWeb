@@ -53,7 +53,6 @@ var ShowListButton =React.createClass({
       <div>
            <input type="button"  className={"button button-glow button-rounded button-caution"} onClick={this.showLists} value="addToLists"  />
            { this.state.showPlayList ? < PlayListModal playLists={this.props.playLists} trackId={this.props.trackId} sectionTracks={"s"} /> : null }
-
      </div>
 
 )

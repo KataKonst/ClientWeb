@@ -5,6 +5,7 @@ var LIKE_EVENT="LIKE_EVENT";
 var GET_LIKES_EVENT="LIKE_EVENT";
 var GET_NR_LIKES_EVENT=" GET_NR_LIKES_EVENT";
 var USERS_WHO_LIKED_TRACK_EVENT="USERS_WHO_LIKED_TRACK_EVENT";
+var USER_LIKED_TRACK="USER_LIKED_TRACK"
 
 var $=require('jquery')
 
@@ -15,12 +16,16 @@ var gTrackId;
 var nrLikes;
 var $=require('jquery')
 var ActionTypes=require('../Actions/ActionTypes')
+var LikesActions=require('../Actions/LikesActions')
+
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 
 function likeTrack(trackId,userId) {
     $.get( "/likeTrack?userId="+encodeURIComponent(userId)+"&trackId="+encodeURIComponent(trackId), function( data ) {
         gTrackId=trackId;
         LikeStore.emitLike();
+        LikesActions.checkUserLikedTrack(trackId,userId)
+
     });
 };
 function getTrackLikesNr(trackId) {
@@ -33,6 +38,7 @@ function getTrackLikesNr(trackId) {
     });
 };
 var usersLikedTracks
+var liked;
 function getUsersWhoLikedTrack(trackId) {
 
 
@@ -44,10 +50,37 @@ function getUsersWhoLikedTrack(trackId) {
     });
 };
 
+
+function checkUserLikedTrack(trackId,userId)
+{
+  $.getJSON( "/checkUserLikedTrack?trackId="+encodeURIComponent(trackId)+"&userId="+encodeURIComponent(userId), function( data ) {
+
+      gTrackId=trackId;
+      liked=data["result"];
+      LikeStore.emitUsersWhoLikedTrack();
+  });
+
+}
+function unlike(trackId,userId)
+{
+  $.get( "/unlike?trackId="+encodeURIComponent(trackId)+"&userId="+encodeURIComponent(userId), function( data ) {
+
+      gTrackId=trackId;
+      LikesActions.getTrackNrLikes(trackId)
+      LikesActions.checkUserLikedTrack(trackId,userId)
+  });
+
+}
+
 var Match_EVENT = 'match';
 
 var LikeStore = Object.assign({}, EventEmitter.prototype, {
 
+
+emitUserLikedTrackCheck:function()
+{
+  this.emit(USER_LIKED_TRACK)
+},
 emitUsersWhoLikedTrack:function()
 {
    this.emit(USERS_WHO_LIKED_TRACK_EVENT)
@@ -62,7 +95,14 @@ emitUsersWhoLikedTrack:function()
   emitGetNrLikesEvent:function(){
     this.emit(GET_NR_LIKES_EVENT)
   },
-
+ addCheckUserLikeListener:function(callback)
+ {
+     this.addListener(USERS_WHO_LIKED_TRACK_EVENT,callback);
+ },
+ removeCheckUserLikeListener:function(callback)
+ {
+     this.removeListener(USERS_WHO_LIKED_TRACK_EVENT,callback);
+ },
   addLikeListener: function(callback) {
     this.addListener(LIKE_EVENT,callback);
   },
@@ -101,6 +141,10 @@ emitUsersWhoLikedTrack:function()
   getUsersWichLikedTrack:function()
   {
     return  usersLikedTracks;
+  },
+  getLiked:function()
+  {
+    return  liked;
   }
 
  });
@@ -120,6 +164,19 @@ AppDispatcher.register(function(action) {
       case ActionTypes.GetUsersWhoLikedTrack:
         trackId=action.trackId
         getUsersWhoLikedTrack(trackId);
+      break;
+      case ActionTypes.checkUserLikedTracks:
+        trackId=action.trackId
+        userId=action.userId
+
+        checkUserLikedTrack(trackId,userId);
+      break;
+
+      case ActionTypes.unlike:
+        trackId=action.trackId
+        userId=action.userId
+
+        unlike(trackId,userId);
       break;
 
       default:

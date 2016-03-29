@@ -10,6 +10,8 @@ var CHANGE_EVENT = 'change';
 var $=require('jquery')
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var ActionTypes=require('../Actions/ActionTypes')
+var CommentActions=require('../Actions/CommentActions')
+
 var  comments = {}
 var id=0;
 var section;
@@ -17,8 +19,10 @@ var section;
 
 function  addComment(text,user,trackId)
  {
-     $.getJSON( "/addComment?text="+encodeURIComponent(text)+"&userid="+encodeURIComponent(user)+"&trackId="+encodeURIComponent(trackId), function( data ) {
-         CommentStore.emitList();
+     $.get( "/addComment?text="+encodeURIComponent(text)+"&userid="+encodeURIComponent(user)+"&trackId="+encodeURIComponent(trackId), function( data ) {
+         CommentStore.emitAdd();
+         CommentActions.ListComments(trackId, "com");
+
      });
  };
 
@@ -27,11 +31,18 @@ function  listComments(trackId,sectionTracks)
 
      $.getJSON( "/getComments?trackId="+encodeURIComponent(trackId), function( data ) {
          id=trackId;
-
          section=sectionTracks;
          comments=data;
          CommentStore.emitList();
      });
+}
+
+function deleteComm(commId)
+{
+  $.get("/deleteComment?commId="+encodeURIComponent(commId),function(data){
+    CommentActions.ListComments(0, "com");
+
+  })
 }
 
 
@@ -89,6 +100,13 @@ AppDispatcher.register(function(action) {
         listComments(trackId,action.section);
       }
       break;
+      case ActionTypes.deleteComm:
+
+          var commId = action.commId;
+       deleteComm(commId);
+break
+
+
         default:
   }
 });

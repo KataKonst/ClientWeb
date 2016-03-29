@@ -25,4 +25,5 @@ def GetComments():
         trackId = flask.request.args.get('trackId')
         data={'trackId' : trackId}
         r = requests.get(ip+':8080/getComments',params=data)
+        print r.text
         return  r.text;

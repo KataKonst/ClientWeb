@@ -34,7 +34,11 @@ ActionTypes.forward="forward"
 ActionTypes.backward="backward"
 ActionTypes.setTracks="setTracks"
 ActionTypes.deletePlayList="deletePlayList"
-
+ActionTypes.checkUserLikedTracks="checkUserLikedTracks"
+ActionTypes.unlike="unlike"
+ActionTypes.checkTrackInPlayList="checkTrackInPlayList"
+ActionTypes.deleteTrackFromPlayList="deleteTrackFromPlayList"
+ActionTypes.deleteComm="deleteComm"
 
 
 

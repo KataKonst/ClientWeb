@@ -26,6 +26,15 @@ var CommentActions={
 
         });
     },
+    deleteComm:function(commId)
+    {
+      AppDispatcher.dispatch({
+         actionType: ActionTypes.deleteComm,
+         commId: commId
+
+       });
+
+    }
 
 
 

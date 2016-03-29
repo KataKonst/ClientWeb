@@ -34,7 +34,7 @@ def likeTrack():
 def getUserLikedTracks():
      userId = flask.request.args.get('userId')
      parameters={'userId':userId}
-     req = requests.get(ip+":8080/getUserLikedTracks",params=parameters);
+     req = requests.get(ip+":8080/getUserLikedTracks",params=parameters)
      return  req.text
 
 

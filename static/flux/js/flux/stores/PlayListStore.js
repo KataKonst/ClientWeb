@@ -52,10 +52,12 @@ function  listTracksPlayList(trackId,sectionTracks,playId)
 
 function addToPlayList(trackId,playId,sectionTracks)
 {
-   $.getJSON( "/addToPLayList?playId="+encodeURIComponent(playId)+"&trackId="+encodeURIComponent(trackId), function( data ) {
+   $.get( "/addToPLayList?playId="+encodeURIComponent(playId)+"&trackId="+encodeURIComponent(trackId), function( data ) {
          id=trackId;
          section=sectionTracks;
          tracks=data;
+         PlayListActions.checkTrackInPlayList(playId,trackId)
+
      });
 
 }
@@ -92,7 +94,6 @@ function getUsersPlayLists(userId)
   $.getJSON( "/getUserPlayLists?userId="+encodeURIComponent(userId), function( data ) {
         playList=data;
 
-        console.log(data.length)
         PLayListStore.emitGetUserPlayList()
     });
 
@@ -267,18 +268,15 @@ var PLayListStore = Object.assign({}, EventEmitter.prototype, {
             var trackId=action.trackId;
             hidePlayList(trackId,section)
             break;
-
-            case  ActionTypes.playListsOfUser:
-                var userId=action.trackId;
-                getUsersPlayLists(userId)
-                break;
-
-
-                case  ActionTypes.deletePlayList:
-                    var playListId=action.playId;
-                 var userId=action.userId
-                    deletePlayList(playListId,userId)
-                    break;
+       case  ActionTypes.playListsOfUser:
+            var userId=action.trackId;
+            getUsersPlayLists(userId)
+            break;
+      case  ActionTypes.deletePlayList:
+            var playListId=action.playId;
+            var userId=action.userId
+            deletePlayList(playListId,userId)
+            break;
 
 
          default:

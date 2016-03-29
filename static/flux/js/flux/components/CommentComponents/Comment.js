@@ -1,15 +1,25 @@
 var React = require('react');
-
+var CommentActions=require("../../Actions/CommentActions")
 
 var Comment=React.createClass({
+
+propTypes:{
+
+  commentId:this.props.string
+},
 
   getInitialState: function() {
 
         return( {
           userName:this.props.userName,
           commentText:this.props.commentText,
-          photoLink:this.props.photoLink
+          photoLink:this.props.photoLink,
+
         })
+      },
+      deleteComm:function()
+      {
+               CommentActions.deleteComment(this.props.commentId)
       },
 
 
@@ -24,7 +34,7 @@ var Comment=React.createClass({
            <li className={"comment"}>
      <a href="#" title={"View this user profile"} className={"photo"}>
      <img src={photoLink} alt={""}  height="42" width="42"/></a>
-     <div className={"meta"}>{this.state.userName}{"| 2012.07.24 14:58"} <a className={"reply"}>Reply</a></div>
+     <div className={"meta"}>{this.state.userName}{"| 2012.07.24 14:58"} <a className={"delete"} onClick={this.deleteComm}>Reply</a></div>
      <div className={"body"}>{this.state.commentText}</div>
      </li>
      </ul>

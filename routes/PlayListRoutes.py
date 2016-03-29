@@ -56,13 +56,22 @@ def deletePlayLists():
      playId=flask.request.args.get('playId')
      parameters={'playId':playId}
      req = requests.get(ip+":8080/deletePlayList",params=parameters)
-
-
-
-
-
      return  req.text
 
+@playListRoutes.route('/checkTrackFromPlayList')
+def checkUserLikedTrack():
+    trackId = flask.request.args.get('trackId')
+    playId = flask.request.args.get('playId')
+    parameters={'trackId':trackId,"playId":playId}
+    req = requests.get(ip+":8080/checkTrackFromPlayList?",params=parameters)
+    return  req.text
 
+@playListRoutes.route('/deleteTrackFromPlayList')
+def deleteTrackFromPlayList():
+    trackId = flask.request.args.get('trackId')
+    playId = flask.request.args.get('playId')
+    parameters={'trackId':trackId,"playId":playId}
+    req = requests.get(ip+":8080/deleteTrackFromPlayList?",params=parameters)
+    return  req.text
 
 
