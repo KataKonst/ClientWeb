@@ -9,8 +9,8 @@ left:20%}
 {
     position:absolute;
     top:20%;
-         float:left;
     display:inline;
+    width: 100%;
 
 
 
@@ -21,23 +21,72 @@ left:20%}
 
  }
 
- #playListTracks{
-     float:left;
+ .playListTracks{
      display:inline;
-
- }
-
- .bottomTrack {
-     positin:relative;
-     width: 1000px
- }
- .ShowListButton{
      float:left
 
  }
+ .container{
+          display:inline;
+
+ }
+
+ .boss{
+          display:inline;
+          float:left
+
+
+
+ }
+
+.userPage{
+     display: block;
+vertical-align:middle;
+         margin-top:10px
+
+}
+ .bottomTrack {
+vertical-align:middle;
+          margin-top:10px
+
+ }
+ .likelist{
+      display: inline-block;
+vertical-align:middle;
+          margin-top:10px
+
+ }
+ .ShowListButton{
+          display: inline-block;
+
+     float:left;
+          margin-top:10px
+
+
+ }
+  .imgdiv
+          {
+                display: inline-block;
+                height:122px;
+                width:122px;
+                top:50%;
+
+          }
+  .className{
+                   display: inline-block;
+
+  }
 
  .LikeTrackButton{
-   float: left;
+               display: inline-block;
+               margin-top:10px;
+               float: left;
+ }
+
+ #profile{
+     position: relative;
+     top:40%
+
  }
 
 

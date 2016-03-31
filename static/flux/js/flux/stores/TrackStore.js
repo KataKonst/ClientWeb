@@ -20,6 +20,8 @@ var PLAY_EVENT = 'PLAY_EVENT';
 var GET_VIZ_EVENT = 'GET_VIZ_EVENT';
 var ADD_VIZ_EVENT = 'ADD_VIZ_EVENT';
 var SEARCH_TRACKS_EVENT = 'SEARCH_TRACKS_EVENT';
+var SEARCH_TRACKS_BY_HASH_TAG_EVENT = 'SEARCH_TRACKS_BY_HASH_TAG_EVENT';
+
 
 var divid
 var trackId
@@ -35,6 +37,17 @@ function setPlaySong(strackName,strackId,_div,OrderId)
   divid=_div;
   pOrderId=OrderId
   TrackStore.emitPlayEvent();
+}
+
+function searchByHashTag(trackId)
+{
+  $.getJSON("/search?searchText="+encodeURIComponent(searchText),function(data){
+       trackSearchResults=data
+       searchText=pSearchText
+       TrackStore.emitSearchTextEvent()
+
+  })
+
 }
 
 
@@ -76,6 +89,17 @@ function setTracks(tracks)
   trackSearchResults=tracks
 }
 
+function getAllHashTags()
+{
+
+       $.getJSON("/search?searchText="+encodeURIComponent(searchText),function(data){
+            trackSearchResults=data
+            searchText=pSearchText
+            TrackStore.emitSearchTextEvent()
+
+       })
+}
+
 function forwardSong(){
 pOrderId=pOrderId+1
 console.log(pOrderId)
@@ -100,6 +124,17 @@ TrackStore.emitPlayEvent();
 
 }
 
+function  searchTracksByHashTags(hashId)
+{
+  $.getJSON("/getTracksOfHash?hashId="+encodeURIComponent(hashId),function(data){
+       trackSearchResults=data
+       searchText=hashId
+       TrackStore.emitSearchTextEvent()
+       alert("ss")
+
+  })
+
+}
 
 
 var TrackStore = Object.assign({}, EventEmitter.prototype, {
@@ -237,14 +272,18 @@ removGetVisListener:function(callback)
        backwardSong()
        break
   case ActionTypes.setTracks:
-  console.log("setStore")
-
-  tracks=action.tracks
+    tracks=action.tracks
     setTracks(tracks)
   break
 
   case ActionTypes.checkUserLikedTrack:
   break
+  case ActionTypes.getTracksByHashTags:
+    hashId=action.hashId
+   searchTracksByHashTags(hashId)
+  break
+  case ActionTypes.getTracksByHashTags:
+
 
     default:
   }

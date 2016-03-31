@@ -39,7 +39,10 @@ ActionTypes.unlike="unlike"
 ActionTypes.checkTrackInPlayList="checkTrackInPlayList"
 ActionTypes.deleteTrackFromPlayList="deleteTrackFromPlayList"
 ActionTypes.deleteComm="deleteComm"
-
+ActionTypes.getHashTagsForTrack="getHashTagsForTrack"
+ActionTypes.getTracksByHashTags="getTracksByHashTags"
+ActionTypes.getAllHashTag="getAllHashTag"
+ActionTypes.getUserPhotoLink="getUserPhotoLink"
 
 
 

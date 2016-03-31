@@ -24,6 +24,7 @@ var LikeTrackButton= require("./LikeTrackButton")
 var $=require('jquery')
 var ShowListButton=require('./ShowListButton')
 var PlayButton=require('./PlayButton')
+var HashTagList=require('./HashTagList')
 
 var AudioTrackPlayer = React.createClass({
 
@@ -129,18 +130,34 @@ var AudioTrackPlayer = React.createClass({
        var lnk="/track/ss?id="+this.state.id+"&photoLink="+this.state.photoLink+"&trackLink="+this.state.link+"&trackName="+name+"&userId="+this.state.userId;
         return (
               <section className={"trackPlayer"}>
-              <div id={"imgdiv"}>
-              <img src={photoLink} height="122" width="122"/>
+
+
+              <div className={"imgdiv"}>
+                <img src={photoLink} height="122" width="122"/>
+
               </div>
               <div id={"buttonsPanel"}>
-                   <p>{this.state.views}</p>
-                <Link href= {lnk} className={"button button-3d button-action button-pill"}> user page</Link>.
-                <progress  id={id} value={"0"} max={"1"}  onClick={this.progressBar}></progress>
-                <PlayButton  userId={this.state.userId} trackId={this.state.id} trackLink={this.state.link} trackName={this.state.name} orderId={this.props.orderId}/>
-<div id={"bottomTrack"}>
-                 <ShowListButton userId={this.state.userId} trackId={this.state.id} playLists={this.state.playLists}  sectionTracks={this.state.sectionTracks}/>
-                 <LikeTrackButton userId={this.state.userId} trackId={this.state.id} />
-</div>
+    <div className={"userPage"}>
+    <HashTagList trackId={this.state.id}/>
+                   <Link href= {lnk} className={"button button-3d button-action button-pill"}> user page</Link>.
+       </div>
+              <div className={"likelist"}>
+                  <div className={"ShowListButton"}>
+                      <PlayButton  userId={this.state.userId} trackId={this.state.id} trackLink={this.state.link} trackName={this.state.name} orderId={this.props.orderId}/>
+                  </div>
+                  <div  className={"LikeTrackButton"}>
+                           <progress  id={id} value={"0"} max={"1"}  onClick={this.progressBar}></progress>
+                  </div>
+
+              </div>
+            <div className={"bottomTrack"}>
+                 <div  className={"LikeTrackButton"}>
+                    <LikeTrackButton className={"LikeTrackButton"} userId={this.state.userId} trackId={this.state.id} />
+                </div>
+                 <div className={"ShowListButton"}>
+                   <ShowListButton userId={this.state.userId} trackId={this.state.id} playLists={this.state.playLists}  sectionTracks={this.state.sectionTracks}/>
+                </div>
+            </div>
                 </div>
               </section>
         );

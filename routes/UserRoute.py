@@ -34,3 +34,10 @@ def searchUserrId():
        parameters={'searchText':searchText}
        req= requests.get(ip+':8080/searchUser',params=parameters)
        return  req.text
+
+@userRoutes.route('/getUserById')
+def getUserById():
+     userId=flask.request.args.get('userId')
+     parameters={'userId':userId}
+     req=requests.get(ip+':8080/getUserById',params=parameters)
+     return  req.text

@@ -9,8 +9,16 @@ var SEARCH_USER_EVENT="SEARCH_USER_EVENT"
 
 var UserSearchResults;
 var searchText;
-function getUserDetails(userId)
+var userId
+var user
+function getUserDetails(pUserId)
 {
+  $.getJSON( "/getUserById?userId="+encodeURIComponent(pUserId), function( data ) {
+
+      userId=pUserId
+      user=data;
+      UserStore.emitGetUserDetails()
+    });
 
 }
 
@@ -77,6 +85,10 @@ var UserStore=Object.assign({}, EventEmitter.prototype, {
    getSearchText:function()
    {
      return searchText
+   },
+   getUser()
+   {
+     return user;
    }
  });
 
@@ -85,7 +97,8 @@ var UserStore=Object.assign({}, EventEmitter.prototype, {
    switch(action.actionType) {
        case ActionTypes.GetUserDetailsEvent:
             userId=action.userId
-            likeTrack(userId);
+
+            getUserDetails(userId);
         break
         case ActionTypes.ShowUserProfile:
              userId=action.userId

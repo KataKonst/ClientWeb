@@ -19,6 +19,14 @@ var UserActions={
           userId: userId
       });
 
+  },
+  getUserPhotoLink:function(userId)
+  {
+    AppDispatcher.dispatch({
+        actionType: ActionTypes.getUserPhotoLink,
+        userId: userId
+    });
+
   }
 
 

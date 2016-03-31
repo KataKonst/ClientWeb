@@ -10,7 +10,7 @@ from routes.CommentsRoute  import commentsRoutes
 from routes.likeRoute  import likeRoutes
 from routes.UserRoute  import userRoutes
 from routes.ViewsRoutes  import viewRoutes
-
+from routes.HashTagsRoutes  import hashTagRoutes
 
 app = flask.Flask(__name__)
 app.secret_key = 'boss'
@@ -19,6 +19,7 @@ app.register_blueprint(commentsRoutes)
 app.register_blueprint(likeRoutes)
 app.register_blueprint(userRoutes)
 app.register_blueprint(viewRoutes)
+app.register_blueprint(hashTagRoutes)
 
 
 

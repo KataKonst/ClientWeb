@@ -50,10 +50,14 @@ var PlayListsPage=React.createClass({
 
     <section id="playListPage">
     <CreatePlayListInput userId={this.props.userId}/>
-      {this.state.showUsPlay? <Boss userId={this.props.userId} id={"userPLayList"} playLists={this.state.playLists}/> : null}
-<section id={"playListTracks"}>
+    <div className={"container"}>
+    <div className={"boss"}>
+    {this.state.showUsPlay? <Boss userId={this.props.userId} id={"userPLayList"} playLists={this.state.playLists}/> : null}
+       </div>
+<div className={"playListTracks"}>
       {this.state.showTracks? <TrackList tracks={this.state.tracks} sectionTracks={"s"}  playLists={this.state.playLists} userId={this.props.userId}/> : null}
-</section>
+</div>
+</div>
     </section>
   )
   }

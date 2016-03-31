@@ -70,8 +70,8 @@ audo.play();
 
               return (
                        <section id="match">
-                       <input type="button"  className={"button button-glow button-rounded button-caution"} onClick={this.backward} value="back"  />
-                       <input type="button"  className={"button button-glow button-rounded button-caution"} onClick={this.forward} value="forward"  />
+                       <img src={"/static/buttons/bk.png"} height="42" width="42" onClick={this.backward} value="back"  />
+                        <img src={"/static/buttons/ff.png"} height="42" width="42" onClick={this.forward} value="forward"  />
 
                        <audio controls className={"pacpac"} id="FixedPlayer">
 
