@@ -74,4 +74,17 @@ def deleteTrackFromPlayList():
     req = requests.get(ip+":8080/deleteTrackFromPlayList?",params=parameters)
     return  req.text
 
+@playListRoutes.route('/playLists')
+
+def playLists():
+    return render_template('HomePage.html')
+
+@playListRoutes.route('/wall')
+
+def Wall():
+    return render_template('HomePage.html')
+
+
+
+
 

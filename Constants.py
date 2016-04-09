@@ -1,2 +1,2 @@
 def getServer():
-     return "http://localhost";
+     return "http://127.0.0.1";

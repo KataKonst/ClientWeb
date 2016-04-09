@@ -55,7 +55,7 @@ if(this.props.trackId==LikeStore.getTrackId()){
 
            <div>
 
-           {this.state.isLiked ?  <input type={"button"} value={"ssss"} onClick={this.unlike}/>:
+           {this.state.isLiked ?<a className={"button button-glow button-rounded button-caution"} onClick={this.unlike}>Unlike</a>:
            <button className={"button button-glow button-circle button-action button-jumbo"}><i className={"fa fa-thumbs-up"} onClick={this.likeTrackClick}></i></button>
           }
 

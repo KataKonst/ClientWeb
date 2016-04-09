@@ -27,3 +27,9 @@ def GetComments():
         r = requests.get(ip+':8080/getComments',params=data)
         print r.text
         return  r.text;
+@commentsRoutes.route('/deleteComment', methods=['GET', 'POST'])
+def deleteComment():
+        commId = flask.request.args.get('commId')
+        data={'commId' : commId}
+        r = requests.get(ip+':8080/deleteComment',params=data)
+        return  r.text;

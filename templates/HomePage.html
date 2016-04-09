@@ -1,10 +1,7 @@
 
-<html lang="en">
   <head>
 
-<link rel="import" href="static/bower_components/paper-audio-player/paper-audio-player.html">
 <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/style.css') }}">
-      <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/LikeHeart.css') }}">
 
       <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/audioplayer.css') }}">
             <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/buttons.css') }}">
@@ -16,7 +13,10 @@
 
 
 
-<link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='body/css/style.css') }}">
+                      <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='upload/style.css') }}">
+
+
+
 <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='fonts/css/font-awesome.min.css') }}">
       <link rel="stylesheet" href= "{{ url_for('static',filename="css/bbplayer.css") }}">
 
@@ -27,12 +27,11 @@
 
 
    <meta charset="utf-8">
-    <title>Flux • TodoMVC</title>
+    <title>Audio</title>
 
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
 
   </head>
-  html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -52,6 +51,8 @@
     position: fixed;
     bottom: 0;
     width: 100%;
+        z-index:3;
+
 }
 
             ul#horizontal li {
@@ -60,11 +61,12 @@
 
 
           .centered {
-              position: absolute;
-               left: 30%;
-              top:10%;
-              right:90%;
-              width:100%;
+                    position: relative;
+               left: 20%;
+              background-color: white;
+               right:0;
+    padding:10px;
+
 }
           .pacpac {
     bottom: initial;
@@ -82,6 +84,10 @@ margin: 0 auto;
 
 
 }
+             .addPlayList
+             {
+                 left:-30%;
+             }
 
           .NavButton {
     display: inline-block;
@@ -92,8 +98,10 @@ margin: 0 auto;
 }
 
               .navButtons {
-                position: relative;
-                top:1250%;
+                position: absolute;
+                top:10%;
+                  left: -30%;
+                  width:50%;
 
 }
 
@@ -101,6 +109,7 @@ margin: 0 auto;
               {
                    display:block;
                   vertical-align:middle;
+                  width: 40%;
 
               }
 
@@ -121,8 +130,6 @@ margin: 0 auto;
 
 
 
-<span class="likebtn-wrapper" data-theme="disk" data-white_label="true" data-identifier="like" data-dislike_enabled="false" data-icon_dislike_show="false">4</span>
-<script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
 
 
 
@@ -136,25 +143,27 @@ margin: 0 auto;
   <style type="text/css">
     .hidden { display:none; }
 </style>
-  <div class="panel boss" >
+  <div class="panel boss centered" >
   <div id="tracks">
 
-  </div>
 
+  </div>
+<div id="modal">
+      </div>
 
       <div id="playList">
 
 
+
       </div>
 
 
   </div>
-  <div id="modal">
-      </div>
+
 <Style>
     .rightNav{
-        position: absolute;
-        left:-15%;
+        position: fixed;
+        left:15%;
         top:20%;
     }
 
@@ -197,7 +206,7 @@ margin: 0 auto;
 
   <div id="rt" class="fixedPlayer">boss</div>
   </body>
-  <script src="static/js/bundle.js"></script>
+  <script src="/static/js/bundle.js"></script>
 
 
 
@@ -225,4 +234,4 @@ function setCurTime(x) {
 </script>
 
 
-</html
+</html>

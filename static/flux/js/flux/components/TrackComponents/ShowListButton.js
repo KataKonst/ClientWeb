@@ -28,6 +28,12 @@ var ShowListButton =React.createClass({
     PlayListStore.addShowPlayListsListener(this.listPLayLists)
 
   },
+  componentWillUnmount:function()
+  {
+  PlayListStore.removeHidePlayListListener(this.hidePlayList);
+  PlayListStore.removeShowPlayListsListener(this.listPLayLists)
+
+},
   listPLayLists: function(){
       if(PlayListStore.getId()==this.props.trackId)
       {

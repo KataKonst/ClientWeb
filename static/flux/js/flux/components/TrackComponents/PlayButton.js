@@ -73,7 +73,6 @@ var PlayButton=React.createClass({
 
    playLis:function()
    {
-     alert(TrackStore.getTrackId().substring(1)+" "+this.props.trackId)
      if(TrackStore.getTrackId().substring(1)!=this.props.trackId)
      {
        this.setState({playBut:true,isPlay:false})

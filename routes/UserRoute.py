@@ -41,3 +41,40 @@ def getUserById():
      parameters={'userId':userId}
      req=requests.get(ip+':8080/getUserById',params=parameters)
      return  req.text
+
+
+
+@userRoutes.route('/followUser')
+def followUser():
+     userId=flask.request.args.get('userId')
+     followId=flask.request.args.get('followId')
+     parameters={'userId':userId,'followUser':followId}
+     req=requests.get(ip+':8080/followUser',params=parameters)
+     return  req.text
+
+@userRoutes.route('/unfollowUser')
+def unfollowUser():
+     userId=flask.request.args.get('userId')
+     followId=flask.request.args.get('followId')
+     parameters={'userId':userId,'followUser':followId}
+     req=requests.get(ip+':8080/unfollowUser',params=parameters)
+     return  req.text
+
+@userRoutes.route('/isUserFollowing')
+def isUserFollowing():
+     userId=flask.request.args.get('userId')
+     followId=flask.request.args.get('followId')
+     parameters={'userId':userId,'followUser':followId}
+     req=requests.get(ip+':8080/isUserFollowing',params=parameters)
+     return  req.text
+
+@userRoutes.route('/track/ss')
+def track():
+
+   return  render_template("HomePage.html")
+
+@userRoutes.route('/profile')
+def profile():
+
+   return  render_template("HomePage.html")
+

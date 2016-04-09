@@ -43,6 +43,21 @@ ActionTypes.getHashTagsForTrack="getHashTagsForTrack"
 ActionTypes.getTracksByHashTags="getTracksByHashTags"
 ActionTypes.getAllHashTag="getAllHashTag"
 ActionTypes.getUserPhotoLink="getUserPhotoLink"
+ActionTypes.getTracksUploadedByUser="getTracksUploadedByUser"
+ActionTypes.deleteTrack="deleteTrack"
+ActionTypes.ip="http://127.0.0.1:2000/"
+ActionTypes.serverip="http://127.0.0.1:8080/"
+
+ActionTypes.getUserLikedTracks="getUserLikedTracks"
+ActionTypes.isUserFollowingUser="isUserFollowingUser"
+ActionTypes.followUser="followUser"
+ActionTypes.unFollowUser="unFollowUser"
+ActionTypes.getLoggedUserId="getLoggedUserId"
+ActionTypes.getTracksFollowed="getTracksFollowed"
+ActionTypes.showFollowing="showFollowing"
+ActionTypes.showFollowers="showFollowers"
+
+
 
 
 

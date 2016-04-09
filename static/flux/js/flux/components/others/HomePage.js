@@ -13,6 +13,7 @@ var UserStore = require('../../stores/UserStore');
 var UserList = require('../UserComponents/UserList');
 var SoundActions = require('../../Actions/SoundActions');
 var PlayListActions = require('../../Actions/PlayListActions');
+var UserActions=require('../../Actions/UserActions')
 
 
 
@@ -54,9 +55,10 @@ function  getTrackState(fnc){
               },
             componentDidMount: function() {
               getTrackState(this.ch)
+              UserActions.getLoggedUserId();
             TrackStore.addSearchTracksEvent(this.searchTracks)
             UserStore.addSearchUserListener(this.searchUser)
-        
+
 
             },
             showUserPlayLists:function()
@@ -73,23 +75,22 @@ function  getTrackState(fnc){
                   this.setState({tracks:TrackStore.getSearchResults(),searchText:TrackStore.getSearchText(),showUsersResults:false,show:true})
 
             },
-          ch :function(trcks,sectionTrcks,playLsts,useId){
+          ch :function(trcks,sectionTrcks,playLsts,userId){
 
           this.setState({tracks:trcks,
                sectionTracks:sectionTrcks,
                playLists:playLsts,
-               userId:useId,
+               userId:userId,
                show:true})
 
           },
 
           render: function() {
               var sect="match"
-
               return (
-                       <section id="match" className={"centered"}>
+                       <section id="match">
                         <RightMenu/>
-                        { this.state.show ? <TrackList  key={this.state.searchText} tracks={this.state.tracks} sectionTracks={ "list" } playLists={this.state.playLists} userId={this.state.userId}/> :null}
+                        { this.state.show ? <TrackList  key={this.state.searchText} tracks={this.state.tracks} sectionTracks={ "list" } isProfile={false} userId={this.state.userId}/> :null}
                         { this.state.showUsersResults ? <UserList key={this.state.searchText} users={this.state.users}  userId={this.state.userId}/> :null}
                       </section>
 

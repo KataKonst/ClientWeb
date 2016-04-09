@@ -39,7 +39,7 @@ render:function()
   })
 
   return(
-    <div>
+    <div className="hashs">
     {hashTags}
     </div>
 

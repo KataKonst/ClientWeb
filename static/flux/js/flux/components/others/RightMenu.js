@@ -27,11 +27,15 @@ var RightMenu=React.createClass({
   render:function()
   {
        return(
+         <div>
               <div className="rightNav">
                 <a href="#" className={"button button-rounded button-royal"} onClick={this.setSearchClick}>{"Search Tracks"}</a><br></br>
                 <a href="#" className={"button button-rounded button-royal searchUser userSearchBut"} onClick={this.setSearchUsers}>{"Search User"} </a>
-                <AllHashTags />
               </div>
+              <div className={"hashTags"}>
+              <AllHashTags />
+             </div>
+             </div>
 
 
        )

@@ -9,7 +9,7 @@ var AudioTrackPlayer=require('./AudioTrackPlayer')
             propTypes: {
                          tracks: React.PropTypes.array.isRequired,
                          sectionTracks : React.PropTypes.string.isRequired,
-                         playLists:React.PropTypes.array.isRequired,
+                         isProfile:React.PropTypes.bool.isRequired,
                          userId:React.PropTypes.string.isRequired
             },
             getInitialState:function(){
@@ -24,7 +24,7 @@ var AudioTrackPlayer=require('./AudioTrackPlayer')
             var tracks = this.props.tracks;
             var tracksToDisplay = [];
             var sectionTracks=this.props.sectionTracks
-            var playLists=this.props.playLists
+            var isProfile=this.props.isProfile
             var usrId=this.props.userId
             console.log(this.props.searchText)
 var i=0;
@@ -32,7 +32,7 @@ var i=0;
 
             tracksToDisplay.push(
 
-              <li><AudioTrackPlayer  orderId={i} sectionTracks={ sectionTracks } link={entry["link"]} id={entry["id"]} name={entry["nume"]} playLists={playLists} userId={usrId} photoLink={entry["photoLink"]}/></li>)
+              <li><AudioTrackPlayer   key={entry["id"]} orderId={i} sectionTracks={ sectionTracks } link={entry["link"]} id={entry["id"]} name={entry["nume"]} isProfile={isProfile} userId={usrId} photoLink={entry["photoLink"]} uploaderId={entry["uploaderId"]}/></li>)
 console.log(entry["link"])
     i++;
             });

@@ -10,11 +10,12 @@ var TrackList=require('../TrackComponents/TrackList')
 var PlayListsPage=React.createClass({
 
   propTypes:{
-    userId: React.PropTypes.string.isRequired
+    _query: React.PropTypes.object
   },
   getInitialState:function()
   {
     return({
+      userId:this.props._query['userId'],
       showUsPlay:false,
       playLists:[],
       showTracks:false,
@@ -24,7 +25,7 @@ var PlayListsPage=React.createClass({
   componentDidMount:function(){
     PlayListStore.addGetUserPlayListListener(this.showUserPlayLists)
     PlayListStore.addListTracksListener(this.listTracks)
-    PlayListActions.getPlayListsUsers(this.props.userId)
+    PlayListActions.getPlayListsUsers(this.state.userId)
 
 
 
@@ -49,13 +50,15 @@ var PlayListsPage=React.createClass({
   return(
 
     <section id="playListPage">
-    <CreatePlayListInput userId={this.props.userId}/>
-    <div className={"container"}>
-    <div className={"boss"}>
-    {this.state.showUsPlay? <Boss userId={this.props.userId} id={"userPLayList"} playLists={this.state.playLists}/> : null}
+    <div className={"rightNav"}>
+
+    <CreatePlayListInput userId={this.state.userId}/>
+    {this.state.showUsPlay? <Boss userId={this.state.userId} id={"userPLayList"} playLists={this.state.playLists}/> : null}
        </div>
+       <div className={"container"}>
+
 <div className={"playListTracks"}>
-      {this.state.showTracks? <TrackList tracks={this.state.tracks} sectionTracks={"s"}  playLists={this.state.playLists} userId={this.props.userId}/> : null}
+      {this.state.showTracks? <TrackList tracks={this.state.tracks} sectionTracks={"s"}  playLists={this.state.playLists} userId={this.state.userId}/> : null}
 </div>
 </div>
     </section>

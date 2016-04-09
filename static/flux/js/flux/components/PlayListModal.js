@@ -17,6 +17,7 @@ const customStyles = {
     bottom                : 'auto',
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)'
+    
   }
 };
 
@@ -37,6 +38,7 @@ var PlayListModal = React.createClass({
   },
 
   openModal: function() {
+
     this.setState({modalIsOpen: true});
   },
 
@@ -46,6 +48,7 @@ var PlayListModal = React.createClass({
   },
 
   render: function() {
+
     return (
       <div>
         <Modal

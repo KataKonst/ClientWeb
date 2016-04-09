@@ -39,10 +39,10 @@ var TracksPlayListStore=require('../../stores/TracksPlayListStore')
      },
      checkTrackInList:function()
      {
-       console.log(TracksPlayListStore.getTrackId()+" "+this.props.trackId)
 
-          if(TracksPlayListStore.getTrackId()==this.props.trackId)
+          if(TracksPlayListStore.getPlayId()==this.props.playId)
           {
+
 
             this.setState({isTrackInList:TracksPlayListStore.isLiked()})
           }
@@ -65,7 +65,7 @@ var TracksPlayListStore=require('../../stores/TracksPlayListStore')
            return (
                    <section id="addToPlayList">
 
-                {this.state.isTrackInList? <input type={"button"} value={"delete"} onClick={this.deleteTrack}/>:
+                {this.state.isTrackInList ? <input type={"button"} value={"delete"} onClick={this.deleteTrack}/>:
                    <button className={"button button-circle button-tiny"} onClick={this.handleClick}><i className={"fa fa-plus"}></i></button>}
                    </section>);
     },

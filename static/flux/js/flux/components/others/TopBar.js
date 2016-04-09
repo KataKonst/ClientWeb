@@ -45,26 +45,28 @@ var TopBar=React.createClass({
     },
     render:function()
     {
-
+      var playListId="/playLists?userId="+this.props.userId
+      var profileLink="/profile?userId="+this.props.userId+"&logged=true"
+      var wallLink="/wall?userId="+this.props.userId
+      var uploadLink="/Upload?userId="+this.props.userId
       return(
 
 
     <div id={'cssmenu'}>
             <ul>
-                 <li className={'active'}><a href='.'><span>Home</span></a></li>
-                 <li><a href={'/save'}><span>Upload</span></a></li>
-                <li><a href={'/login'}><span>Login</span></a></li>
-            <li>
-              <div className={"box"}>
-              <div className={"container-1"}>
-              <input type={"search"} id={"search"} placeholder={"Search..."} />
-              <span className={"icon"}><i className={"fa fa-search "} id={"searchBut"} onClick={this.search} ></i></span>
-            <li>  <img src={"http://www.urban.ro/data/Image1/skrillex.jpg"} alt={""}  height="22" width="42" onClick={this.showProfile}/></li>
-            <li>  <Link href= {"/profile/1"}> Profile</Link></li>
-            <li>  <Link href= {"/playLists/1"}> PlayLists</Link></li>
-
-
-
+                 <li className={'active'}>
+                 <li>  <Link href= {"/"}> Home</Link></li>
+</li>
+                 <li> <Link href= {uploadLink}> Upload</Link></li>
+                 <li><a href={'/login'}><span>Login</span></a></li>
+                 <li>
+                    <div className={"box"}>
+                    <div className={"container-1"}>
+                    <input type={"search"} id={"search"} placeholder={"Search..."} />
+                      <span className={"icon"}><i className={"fa fa-search "} id={"searchBut"} onClick={this.search} ></i></span>
+              <li>  <Link href= {profileLink}> Profile</Link></li>
+              <li>  <Link href= {playListId}> PlayLists</Link></li>
+               <li>  <Link href= {wallLink}> Wall</Link></li>
               </div>
               </div>
            </li>

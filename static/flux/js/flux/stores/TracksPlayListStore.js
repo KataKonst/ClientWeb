@@ -7,6 +7,8 @@ var $=require('jquery')
 var  tracks = {}
 var EventEmitter = require('events').EventEmitter;
 var gTrackId=0;
+var gPlayId=0;
+
 var isLikedTrack=false;
 var CHECK_TRACK_IN_PLAYLIST="CHECK_TRACK_IN_PLAYLIST"
 var DELETE_TRACK_FROM_PLAYLIST=" DELETE_TRACK_FROM_PLAYLIST"
@@ -17,6 +19,7 @@ function  checkTrackInPlayList(trackId,playId)
 
         isLikedTrack=data["result"]
         gTrackId=trackId
+        gPlayId=playId
         TracksPlayListStore.emitCheckTrackInPlayList();
     });
 }
@@ -24,6 +27,7 @@ function  checkTrackInPlayList(trackId,playId)
 function deleteTrackFromPlayList(trackId,playId)
 {
   $.get( "/deleteTrackFromPlayList?trackId="+encodeURIComponent(trackId)+"&playId="+encodeURIComponent(playId), function( data ) {
+          gPlayId=playId
 
         TracksPlayListStore.emitDeleteTrackFromPlayList();
         PlayListActions.checkTrackInPlayList(playId,trackId)
@@ -63,6 +67,10 @@ var TracksPlayListStore = Object.assign({}, EventEmitter.prototype, {
   getTrackId:function()
   {
     return gTrackId
+  },
+  getPlayId:function()
+  {
+    return gPlayId
   },
   isLiked:function()
 {

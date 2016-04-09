@@ -16,7 +16,9 @@
     "react-responsive-audio-player":"^0.3.0",
     "react-router-component":"^0.31.4",
     "history":"^2.0.1",
-    "react-sidenav":"^1.0.3"
+    "react-sidenav":"^1.0.3",
+    "react-scrollbar":"^0.4.1",
+    "react-bootstrap" :"0.28.5"
   },
   "devDependencies": {
     "browserify": "^6.2.0",
@@ -29,6 +31,7 @@
   "scripts": {
     "start": "watchify -o /home/katakonst/PycharmProjects/untitled/static/js/bundle.js -v -d js/app.js",
     "startlogin": "watchify -o /home/katakonst/PycharmProjects/untitled/static/js/bundleLogin.js -v -d js/login.js",
+    "tracks": "watchify -o /home/katakonst/PycharmProjects/untitled/static/js/bundleTracks.js -v -d js/tracks.js",
     "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > js/bundle.min.js",
     "test": "jest"
   },

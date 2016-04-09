@@ -15,9 +15,52 @@ left:20%}
 
 
 }
+.hashTags{
+    position:absolute;
+    right :20%;
+
+}
  .playButton{
      display:inline-block;
      margin-top:30px
+
+ }
+
+ .boss2{
+     left:-30%
+  }
+
+
+  .form-container {
+               left: 30%;
+              right:20%;
+              top:25%;
+              width:60%;
+              height:60%;
+       -webkit-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+	box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+        .butonupload{
+               left: 40%;
+              right:40%;
+              top:100%;
+
+
+
+        }
+
+
+
+
+ .hashButton{
+          margin-top:20px;
+          margin-left:20px;
+
+         display:inline-block;
+         float:left;
+
 
  }
 
@@ -27,7 +70,6 @@ left:20%}
 
  }
  .container{
-          display:inline;
 
  }
 
@@ -36,6 +78,10 @@ left:20%}
           float:left
 
 
+
+ }
+ .hashs{
+     display: block;
 
  }
 

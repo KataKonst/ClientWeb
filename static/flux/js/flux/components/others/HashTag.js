@@ -21,14 +21,15 @@ var HashTag=React.createClass({
 
        return(
            <div>
-              <input type={"button"} value={this.props.hashName} onClick={this.searchTracks}/>
+           <a value={this.props.hashName} onClick={this.searchTracks} className={"hashButton button button-primary button-rounded button-small"}>{this.props.hashName}</a>
+
            </div>
 
        )
 
     },
 
-    
+
 
 
 

@@ -5,7 +5,7 @@ var trackName
 var viz;
 var trackId
 var searchText
-var currentPosition
+var currentPosition=0
 
 
 
@@ -14,6 +14,8 @@ var currentPosition
 
 var EventEmitter = require('events').EventEmitter;
 var ActionTypes=require('../Actions/ActionTypes')
+var SoundActions=require('../Actions/SoundActions')
+
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var CHANGE_EVENT = 'change';
 var PLAY_EVENT = 'PLAY_EVENT';
@@ -21,6 +23,10 @@ var GET_VIZ_EVENT = 'GET_VIZ_EVENT';
 var ADD_VIZ_EVENT = 'ADD_VIZ_EVENT';
 var SEARCH_TRACKS_EVENT = 'SEARCH_TRACKS_EVENT';
 var SEARCH_TRACKS_BY_HASH_TAG_EVENT = 'SEARCH_TRACKS_BY_HASH_TAG_EVENT';
+var GET_TRACKS_BY_USER_EVENT = 'GET_TRACKS_BY_USER_EVENT';
+var DELETE_TRACK_EVENT = 'DELETE_TRACK_EVENT';
+
+
 
 
 var divid
@@ -28,7 +34,7 @@ var trackId
 
 var $=require('jquery')
 
-var pOrderId
+var pOrderId=0;
 
 function setPlaySong(strackName,strackId,_div,OrderId)
 {
@@ -84,6 +90,19 @@ function searchTracks(pSearchText)
      })
 
 }
+
+ function  getTracksFollowed(userId){
+
+
+   $.getJSON("/getUserFollowingTracks?userId="+encodeURIComponent(userId),function(data){
+        trackSearchResults=data
+        TrackStore.emitSearchTextEvent()
+
+   })
+
+
+ }
+
 function setTracks(tracks)
 {
   trackSearchResults=tracks
@@ -101,12 +120,14 @@ function getAllHashTags()
 }
 
 function forwardSong(){
+  if(pOrderId+1<trackSearchResults.length){
 pOrderId=pOrderId+1
 console.log(pOrderId)
 trackLink=trackSearchResults[pOrderId]['link'];
 trackName=trackSearchResults[pOrderId]['nume']
 divid="t"+trackSearchResults[pOrderId]['id']
 TrackStore.emitPlayEvent();
+}
 
 
 
@@ -115,13 +136,16 @@ TrackStore.emitPlayEvent();
 }
 
 function backwardSong(){
+  alert("Rele"+pOrderId)
+
+  if(pOrderId-1>=0){
 pOrderId=pOrderId-1
 console.log(pOrderId)
 trackLink=trackSearchResults[pOrderId]['link'];
 trackName=trackSearchResults[pOrderId]['nume']
 divid="t"+trackSearchResults[pOrderId]['id']
 TrackStore.emitPlayEvent();
-
+}
 }
 
 function  searchTracksByHashTags(hashId)
@@ -130,15 +154,45 @@ function  searchTracksByHashTags(hashId)
        trackSearchResults=data
        searchText=hashId
        TrackStore.emitSearchTextEvent()
-       alert("ss")
 
   })
 
 }
+function  getTracksUploadedByUser(userId)
+{
+
+  $.getJSON("/userUploadedTracks?userId="+encodeURIComponent(userId),function(data){
+       trackSearchResults=data
+       searchText=userId
+       TrackStore.emitTracksSearchedByUse();
+
+  })
+}
+
+function deleteTrack(trackId,userId)
+{
+
+    $.get("/deleteTrack?trackId="+encodeURIComponent(trackId),function(data){
+
+         searchText="sada"
+         SoundActions.getTracksUploadedByUser(userId)
+         TrackStore.emitDeleteTrackEvent();
+
+    })
+
+}
+
 
 
 var TrackStore = Object.assign({}, EventEmitter.prototype, {
 
+emitDeleteTrackEvent:function()
+{
+  this.emit(DELETE_TRACK_EVENT)
+},
+  emitTracksSearchedByUse:function(){
+      this.emit(GET_TRACKS_BY_USER_EVENT)
+  },
   emitGetVisEvent: function() {
     this.emit(GET_VIZ_EVENT)
   },
@@ -158,7 +212,23 @@ var TrackStore = Object.assign({}, EventEmitter.prototype, {
   },
  addSearchTracksEvent :function(callback)
  {
-  this.addListener(SEARCH_TRACKS_EVENT,callback)
+   this.addListener(SEARCH_TRACKS_EVENT,callback)
+ },
+ addDeleTrackListener:function(callback)
+ {
+   this.addListener(DELETE_TRACK_EVENT,callback)
+ },
+ removeDeleteTrackListener:function(callback)
+ {
+   this.removeListener(DELETE_TRACK_EVENT,callback)
+ },
+ addTracksSearchedByUserListener:function(callback)
+ {
+   this.addListener(GET_TRACKS_BY_USER_EVENT,callback)
+ },
+removeTracksSearchedByUserListener:function(callback)
+ {
+   this.removeListener(GET_TRACKS_BY_USER_EVENT,callback)
  },
 removeSearchTracksEvent:function(callback){
   this.removeListener(SEARCH_TRACKS_EVENT,callback)
@@ -282,7 +352,22 @@ removGetVisListener:function(callback)
     hashId=action.hashId
    searchTracksByHashTags(hashId)
   break
-  case ActionTypes.getTracksByHashTags:
+  case ActionTypes.getTracksUploadedByUser:
+    userId=action.userId
+    getTracksUploadedByUser(userId)
+
+    break
+    case ActionTypes.deleteTrack:
+
+    trackId=action.trackId;
+    userId=action.userId;
+    deleteTrack(trackId,userId)
+
+    break;
+    case ActionTypes.getTracksFollowed:
+      var userId=action.userId
+
+    getTracksFollowed(userId)
 
 
     default:

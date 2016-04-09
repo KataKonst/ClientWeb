@@ -11,8 +11,10 @@ from routes.likeRoute  import likeRoutes
 from routes.UserRoute  import userRoutes
 from routes.ViewsRoutes  import viewRoutes
 from routes.HashTagsRoutes  import hashTagRoutes
+from routes.tracksRoute  import tracksRoutes
 
 app = flask.Flask(__name__)
+
 app.secret_key = 'boss'
 app.register_blueprint(playListRoutes)
 app.register_blueprint(commentsRoutes)
@@ -20,6 +22,9 @@ app.register_blueprint(likeRoutes)
 app.register_blueprint(userRoutes)
 app.register_blueprint(viewRoutes)
 app.register_blueprint(hashTagRoutes)
+app.register_blueprint(tracksRoutes)
+
+
 
 
 
@@ -32,6 +37,8 @@ login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 
 users = {'test': {'pw': 'test'}}
+
+
 
 class User(flask_login.UserMixin):
     pass
@@ -60,8 +67,9 @@ def test():
     return  render_template("test.html")
 
 @app.route('/save', methods=['GET', 'POST'])
+@flask_login.login_required
 def save():
-    return  render_template("Upload.html",uploadip=ip)
+    return  render_template("Upload.html",uploadip=ip,userId=flask.ext.login.current_user.id)
 
 @app.route('/search', methods=['GET', 'POST'])
 def react():
@@ -101,9 +109,6 @@ def jsonResults():
     req = requests.get(ip+':8080/match?nume='+name)
     posts=JsonUtils.getTracks(req.text);
     return  req.text;
-
-
-
 
 @login_manager.user_loader
 def user_loader(email):
@@ -158,16 +163,6 @@ def protected():
 
 
 
-@app.route('/play')
-@flask_login.login_required
-def boss():
-    r = requests.get('"http://192.168.1.24:8080/play')
-    return  r.text
-
-
-
-
-
-
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
+

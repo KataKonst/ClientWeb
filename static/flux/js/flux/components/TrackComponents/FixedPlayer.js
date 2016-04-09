@@ -13,6 +13,8 @@ var React = require('react');
 var AudioTrackPlayer=require('./AudioTrackPlayer')
 var AudioPlayer = require('react-responsive-audio-player');
 var SoundActions=require('../../Actions/SoundActions')
+var ActionTypes=require('../../Actions/ActionTypes')
+
 var TrackStore=require('../../stores/TrackStore')
 
 
@@ -53,7 +55,7 @@ SoundActions.forward()
 
 this.setState({trackName:TrackStore.getTrackName(),trackLink:TrackStore.getTrackLink()},function(e){
 var audo = document.getElementById('FixedPlayer');
-audo.src='http://127.0.0.1:2000/'+this.state.trackLink
+audo.src=ActionTypes.ip+this.state.trackLink
 audo.load()
 audo.play();
 });
@@ -64,9 +66,9 @@ audo.play();
 
 
             var playlit =
-              [{ url: 'http://127.0.0.1:2000/'+this.state.trackLink,
+              [{ url: ActionTypes.ip+this.state.trackLink,
                  displayText:this.state.trackName }]
-                 url='http://127.0.0.1:2000/'+this.state.trackLink;
+                 url=ActionTypes.ip+this.state.trackLink;
 
               return (
                        <section id="match">

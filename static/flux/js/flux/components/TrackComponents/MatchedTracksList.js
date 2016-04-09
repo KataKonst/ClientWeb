@@ -38,7 +38,7 @@ function  getTrackState(){
 
               return (
                        <section id="match">
-                       <TrackList tracks={trks} sectionTracks={ sect } playLists={this.state.playLists} userId={this.state.userId} searchText={" "}/>
+                       <TrackList tracks={trks} sectionTracks={ sect } isProfile={true} userId={this.state.userId} searchText={" "}/>
                        </section>
                );
           },

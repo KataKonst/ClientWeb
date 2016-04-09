@@ -37,10 +37,10 @@ function  listComments(trackId,sectionTracks)
      });
 }
 
-function deleteComm(commId)
+function deleteComm(commId,trackId)
 {
   $.get("/deleteComment?commId="+encodeURIComponent(commId),function(data){
-    CommentActions.ListComments(0, "com");
+    CommentActions.ListComments(trackId, "com");
 
   })
 }
@@ -101,9 +101,10 @@ AppDispatcher.register(function(action) {
       }
       break;
       case ActionTypes.deleteComm:
-
           var commId = action.commId;
-       deleteComm(commId);
+          var trackId = action.trackId;
+
+       deleteComm(commId,trackId);
 break
 
 

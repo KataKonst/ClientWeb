@@ -17,6 +17,15 @@ var SoundActions = {
             text: text
         });
     },
+    getTracksFollowed:function(userId)
+    {
+
+      AppDispatcher.dispatch({
+          actionType: ActionTypes.getTracksFollowed,
+          userId: userId,
+       });
+
+    },
     PlaySong:function(trackLink,trackName,id,orderId)
   {
 
@@ -40,18 +49,14 @@ var SoundActions = {
           });
 },
 getVis:function(trackId)
-{
-
-
-        AppDispatcher.dispatch({
+{    AppDispatcher.dispatch({
             actionType: ActionTypes.GetVis,
             trackId: trackId
-
-                  });
+       });
 },
 searchTracks:function(searchText)
 {
-  AppDispatcher.dispatch({
+   AppDispatcher.dispatch({
       actionType: ActionTypes.searchTracks,
       searchText: searchText
 
@@ -61,7 +66,7 @@ searchTracks:function(searchText)
 
 setSearchCriteria:function(searchCriteria)
 {
-  AppDispatcher.dispatch({
+   AppDispatcher.dispatch({
       actionType: ActionTypes.setSearchCriteria,
       searchCriteria: searchCriteria
 
@@ -70,23 +75,20 @@ setSearchCriteria:function(searchCriteria)
 
 },
 searchUser:function(searchText){
-
-AppDispatcher.dispatch({
+   AppDispatcher.dispatch({
    actionType:ActionTypes.searchUsers,
    searchText:searchText
 })
 
 },
 forward:function(){
-AppDispatcher.dispatch({
+  AppDispatcher.dispatch({
    actionType:ActionTypes.forward,
 })
 
 },
 backward:function(){
-  console.log("ss")
-
-AppDispatcher.dispatch({
+  AppDispatcher.dispatch({
    actionType:ActionTypes.backward,
 })
 
@@ -100,6 +102,23 @@ setTracks:function(tracks){
    })
 
 },
+
+getTracksUploadedByUser:function(userId)
+{
+  AppDispatcher.dispatch({
+     actionType:ActionTypes.getTracksUploadedByUser,
+     userId:userId
+   })
+
+},
+deleteTrack:function(trackId,userId)
+{
+  AppDispatcher.dispatch({
+    actionType:ActionTypes.deleteTrack,
+    trackId:trackId,
+    userId:userId
+   })
+}
 
 }
 module.exports=SoundActions

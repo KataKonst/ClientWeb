@@ -12,6 +12,13 @@ var UserActions={
       });
 
   },
+  getLoggedUserId:function()
+  {
+    AppDispatcher.dispatch({
+        actionType: ActionTypes.getLoggedUserId,
+    });
+
+  },
   showUserProfile: function (userId) {
 
       AppDispatcher.dispatch({
@@ -27,7 +34,61 @@ var UserActions={
         userId: userId
     });
 
-  }
+  },
+  getUserLikedTracks:function(userId){
+    AppDispatcher.dispatch({
+        actionType:   ActionTypes.getUserLikedTracks,
+        userId: userId
+    });
+
+  },
+  isUserFollowingUser:function(userId,followUserId)
+  {
+    AppDispatcher.dispatch({
+        actionType:   ActionTypes.isUserFollowingUser,
+        userId: userId,
+        followUserId:followUserId
+    });
+
+
+  },
+  followUser:function(userId,followUserId)
+  {
+    AppDispatcher.dispatch({
+        actionType:   ActionTypes.followUser,
+        userId: userId,
+        followUserId:followUserId
+    });
+
+},
+unFollowUser:function(userId,followUserId)
+{
+  AppDispatcher.dispatch({
+      actionType:   ActionTypes.unFollowUser,
+      userId: userId,
+      followUserId:followUserId
+  });
+
+
+},
+showFollowers:function(userId)
+{
+  AppDispatcher.dispatch({
+      actionType:   ActionTypes.showFollowers,
+      userId: userId
+      });
+
+
+},
+showFollowing:function(userId)
+{
+  AppDispatcher.dispatch({
+      actionType:   ActionTypes.showFollowing,
+      userId: userId
+      });
+
+
+}
 
 
 }

@@ -34,7 +34,6 @@ var LoginForm = React.createClass({
         return
       }
 
-      alert('form submitted!')
     }
 });
 module.exports=LoginForm

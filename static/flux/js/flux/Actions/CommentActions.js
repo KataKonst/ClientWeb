@@ -26,11 +26,12 @@ var CommentActions={
 
         });
     },
-    deleteComm:function(commId)
+    deleteComm:function(commId,trackId)
     {
       AppDispatcher.dispatch({
          actionType: ActionTypes.deleteComm,
-         commId: commId
+         commId: commId,
+         trackId: trackId
 
        });
 
