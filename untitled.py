@@ -4,7 +4,6 @@ import json
 from JsonUtils import JsonUtils
 from LoginUtils import LoginUtils
 from flask import render_template
-from flask.ext.bower import Bower
 from routes.PlayListRoutes import playListRoutes
 from routes.CommentsRoute  import commentsRoutes
 from routes.likeRoute  import likeRoutes
@@ -12,8 +11,15 @@ from routes.UserRoute  import userRoutes
 from routes.ViewsRoutes  import viewRoutes
 from routes.HashTagsRoutes  import hashTagRoutes
 from routes.tracksRoute  import tracksRoutes
+from flask.ext.socketio import SocketIO, emit
+import Constants
+
+ip=Constants.getServer()
+
+
 
 app = flask.Flask(__name__)
+socketio = SocketIO(app)
 
 app.secret_key = 'boss'
 app.register_blueprint(playListRoutes)
@@ -25,10 +31,6 @@ app.register_blueprint(hashTagRoutes)
 app.register_blueprint(tracksRoutes)
 
 
-
-
-
-ip="http://127.0.0.1"
 
 import flask.ext.login as flask_login
 
@@ -65,6 +67,13 @@ def home():
 @app.route('/test', methods=['GET', 'POST'])
 def test():
     return  render_template("test.html")
+
+
+
+@socketio.on('conn')
+def test_message(message):
+   print "Sss"
+
 
 @app.route('/save', methods=['GET', 'POST'])
 @flask_login.login_required
@@ -164,5 +173,6 @@ def protected():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    socketio.run(app,host='0.0.0.0')
+
 
